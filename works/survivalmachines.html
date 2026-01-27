@@ -105,6 +105,16 @@
 
     @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } .project-info-row { flex-direction: column; gap: 30px; } }
     @media (max-width: 600px) { .logo-island { flex: 0 0 80px; } .tile { font-size: 1vh; } .project-header h1 { font-size: 24px; } }
+
+          html, body {
+      scrollbar-width: thin;
+      scrollbar-color: #333 #000;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
+
   </style>
 </head>
 <body>
