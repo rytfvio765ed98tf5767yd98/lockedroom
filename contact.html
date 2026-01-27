@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <meta name="description" content="the unveiling of light's feverish dreams">
+    <meta name="author" content="Maja Braumberger">
+    <meta http-equiv="refresh" content="180">
+    <title>contact | maja braumberger</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 36px;
+            padding: 0;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 800px;  
+            height: 600px; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: black;  
+        }
+
+        .strip {
+            width: 100%; 
+            height: 5px;
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: scaleX(1); 
+        }
+
+        .contact-link {
+            font-family: 'Roboto Mono', monospace;
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #b0b0b0;
+            padding-bottom: 4px;
+            transition: color 0.3s, border-color 0.3s;
+            opacity: 0;
+            display: block;
+            width: fit-content;
+        }
+
+        .contact-link:hover {
+            color: #ffffff;
+            border-color: #ffffff;
+            animation-play-state: paused; 
+        }
+
+        .mail {
+            margin-top: 13px;
+            animation: fadeInLink 1.5s ease forwards 1s; 
+        }
+        .instagram {
+            margin-top: 64px;
+            animation: 
+                fadeInLink 1.5s ease forwards 2.5s, 
+                blink 4s infinite ease-in-out 4s; 
+        }
+
+        @keyframes slideIn {
+            0% { transform: scaleX(0); transform-origin: left; }
+            100% { transform: scaleX(1); }
+        }
+
+        @keyframes fadeInLink {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            45% { opacity: 1; }
+            50% { opacity: 0.4; }
+            55% { opacity: 1; }
+            80% { opacity: 1; }
+            82% { opacity: 0.7; }
+            84% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="imageContainer"></div>
+
+    <a href="mailto:contact@majabraumberger.com" class="contact-link mail">contact@majabraumberger.com</a>
+    <a href="https://www.instagram.com/majabraumberger" target="_blank" class="contact-link instagram">@majabraumberger</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("imageContainer");
+            const imgSrc = "rip.webp";  
+            const stripHeight = 10;  
+            
+            container.style.backgroundImage = `url(${imgSrc})`;
+            container.style.backgroundPosition = 'center center';  
+            container.style.backgroundSize = 'cover'; 
+
+            const strips = Math.ceil(container.offsetHeight / stripHeight); 
+
+            for (let i = 0; i < strips; i++) {
+                let strip = document.createElement("div");
+                strip.classList.add("strip");
+                strip.style.height = stripHeight + "px";
+                strip.style.backgroundImage = `url(${imgSrc})`;  
+                strip.style.backgroundPosition = `0 -${i * stripHeight}px`;  
+                strip.style.animation = `slideIn 0.7s steps(1) ${i * 0.05}s forwards`;  
+                container.appendChild(strip);
+            }
+        });
+    </script>
+</body>
+</html>
