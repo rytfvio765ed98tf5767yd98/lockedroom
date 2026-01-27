@@ -24,17 +24,34 @@
       overflow-x: hidden;
     }
 
+    
     #preloader { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
       background-color: black; display: flex; justify-content: center; align-items: center; 
       z-index: 9999; transition: opacity 1.5s ease, visibility 1.5s; 
     }
     #preloader.hidden { opacity: 0; visibility: hidden; }
+
     .loader-container { width: 90vw; max-width: 600px; height: 2px; background-color: rgba(255, 255, 255, 0.1); margin-top: 40px; position: relative; }
-    .loader-bar { width: 0%; height: 2px; background-color: white; animation: loading 4s ease-in-out forwards 0.5s; }
-    @keyframes loading { 0% { width: 0%; } 100% { width: 100%; } }
+    
+    .loader-bar { 
+      width: 0%; height: 2px; background-color: white; 
+      transition: width 0.4s ease-out; 
+    }
+
+    .loading-text {
+      margin-top: 15px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #444;
+      text-transform: uppercase;
+    }
+
+    .blink { animation: blinker 1.5s linear infinite; }
+    @keyframes blinker { 50% { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+  
     .wide-strip {
       position: fixed;
       top: 0; left: 0; right: 0; height: 6vh;
@@ -58,21 +75,16 @@
     }
     .tile:hover { background-color: white; color: black; }
 
-    .content-wrapper { width: 100%; padding-bottom: 100px; }
     
-    .header-container { 
-      padding: 60px 5% 15px 5%; 
-      text-align: left; 
-    }
+    .content-wrapper { width: 100%; padding-bottom: 100px; animation: fadeIn 2s ease; }
+    
+    .header-container { padding: 60px 5% 15px 5%; text-align: left; }
     
     .main-title { 
       font-family: 'Roboto', sans-serif; 
       font-size: clamp(1.5rem, 5vw, 3rem); 
-      font-weight: 700; 
-      color: #fff; 
-      text-transform: uppercase; 
-      margin: 0; 
-      letter-spacing: -1px; 
+      font-weight: 700; color: #fff; text-transform: uppercase; 
+      margin: 0; letter-spacing: -1px; 
     }
 
     .hero-strip {
@@ -89,8 +101,7 @@
 
     .static-content {
       display: flex; align-items: center; justify-content: center; 
-      width: 100%; height: 80%; z-index: 1; gap: 2%;
-      flex-wrap: nowrap;
+      width: 100%; height: 80%; z-index: 1; gap: 2%; flex-wrap: nowrap;
     }
 
     .media-frame { height: 100%; object-fit: cover; border-radius: 4px; background-color: rgba(0, 0, 0, 0); flex-shrink: 0; }
@@ -98,11 +109,8 @@
     
     .video-frame { 
       height: 100% !important; 
-      width: 30%; 
-      max-width: 30%;
-      aspect-ratio: 16 / 9; 
-      object-fit: contain; 
-      flex-shrink: 1;
+      width: 30%; max-width: 30%; aspect-ratio: 16 / 9; 
+      object-fit: contain; flex-shrink: 1;
     }
 
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -123,16 +131,10 @@
 
     footer { 
       position: fixed; bottom: 0; width: 100%; text-align: center; 
-      font-size: 11px; color: #444;
-      padding: 15px 0; z-index: 100;
-      font-family: monospace;
+      font-size: 11px; color: #444; padding: 15px 0; z-index: 100; font-family: monospace;
     }
 
-     html, body {
-      scrollbar-width: thin;
-      scrollbar-color: #333 #000;
-    }
-
+    html, body { scrollbar-width: thin; scrollbar-color: #333 #000; }
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
@@ -151,7 +153,10 @@
   <div id="preloader">
     <div style="display: flex; flex-direction: column; align-items: center;">
       <img src="images/logo/logo-mb.jpg" alt="Logo" style="width: 140px; opacity: 0; animation: fadeIn 1.5s ease forwards;">
-      <div class="loader-container"><div class="loader-bar"></div></div>
+      <div class="loader-container">
+        <div id="bar" class="loader-bar"></div>
+      </div>
+      <div class="loading-text blink">Loading</div>
     </div>
   </div>
 
@@ -162,9 +167,7 @@
       <a href="works.html" class="tile">WORKS</a>
     </div>
     <div class="logo-island">
-      <a href="index.html" class="logo-link">
-        <img src="images/logo/logo-mb.jpg" alt="MB">
-      </a>
+      <a href="index.html" class="logo-link"><img src="images/logo/logo-mb.jpg" alt="MB"></a>
     </div>
     <div class="nav-group">
       <a href="directory.html" class="tile">DIRECTORY</a>
@@ -209,26 +212,51 @@
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
   <script>
-    window.addEventListener('load', function() {
-      const preloader = document.getElementById('preloader');
-      const minimumDisplayTime = 4000; 
-      const startTime = window.performance.timing.navigationStart;
-      const currTime = Date.now();
-      const elapsed = currTime - (startTime || currTime);
-      const remainingTime = Math.max(0, minimumDisplayTime - elapsed);
+    const mediaElements = document.querySelectorAll('img, video');
+    const bar = document.getElementById('bar');
+    const preloader = document.getElementById('preloader');
+    let loadedCount = 0;
+    const totalMedia = mediaElements.length;
 
-      setTimeout(() => {
-        if(preloader) preloader.classList.add('hidden');
-      }, remainingTime);
-    });
-
-    setTimeout(() => {
-      const preloader = document.getElementById('preloader');
-      if(preloader && !preloader.classList.contains('hidden')) {
-        preloader.classList.add('hidden');
+    function hidePreloader() {
+      if (preloader && !preloader.classList.contains('hidden')) {
+        if (bar) bar.style.width = '100%';
+        setTimeout(() => preloader.classList.add('hidden'), 500);
       }
-    }, 8000);
-  </script>
+    }
 
+    function updateProgress() {
+      loadedCount++;
+      if (totalMedia > 0) {
+        const percentage = (loadedCount / totalMedia) * 100;
+        if (bar) bar.style.width = percentage + '%';
+        if (loadedCount >= totalMedia) hidePreloader();
+      }
+    }
+
+    const safetyTimeout = setTimeout(hidePreloader, 3000);
+
+    if (totalMedia === 0) {
+      hidePreloader();
+    } else {
+      mediaElements.forEach(media => {
+        if (media.tagName.toLowerCase() === 'img') {
+          if (media.complete) updateProgress();
+          else {
+            media.addEventListener('load', updateProgress);
+            media.addEventListener('error', updateProgress);
+          }
+        } else if (media.tagName.toLowerCase() === 'video') {
+          if (media.readyState >= 3) updateProgress();
+          else {
+            media.addEventListener('loadedmetadata', updateProgress);
+            media.addEventListener('error', updateProgress);
+          }
+        }
+      });
+    }
+
+    window.addEventListener('load', hidePreloader);
+  </script>
 </body>
 </html>
