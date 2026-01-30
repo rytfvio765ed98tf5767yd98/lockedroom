@@ -68,13 +68,13 @@
 
         .mail {
             margin-top: 0px;
-            animation: fadeInLink 1.5s ease forwards 1s; 
+            animation: fadeInLink 1s ease forwards 1s; 
         }
         
         .instagram {
             margin-top: 30px;
             animation: 
-                fadeInLink 1.5s ease forwards 2s, 
+                fadeInLink 1.5s ease forwards 1s, 
                 blink 4s infinite ease-in-out 4s; 
         }
 
@@ -100,6 +100,7 @@
     </style>
 </head>
 <body>
+    <link rel="preload" as="image" href="rip.webp">
     <div class="container" id="imageContainer"></div>
 
     <a href="mailto:contact@majabraumberger.com" class="contact-link mail">contact@majabraumberger.com</a>
@@ -126,7 +127,8 @@
                 strip.style.backgroundSize = `${currentWidth}px auto`;  
                 strip.style.backgroundPosition = `center -${i * stripHeight}px`;  
     
-                strip.style.animation = `slideIn 0.7s steps(1) ${i * 0.03}s forwards`;  
+           
+                strip.style.animation = `slideIn 0.5s steps(1) ${i * 0.01}s forwards`;  
                 container.appendChild(strip);
             }
         });
