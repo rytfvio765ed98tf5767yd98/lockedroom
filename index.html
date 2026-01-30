@@ -402,9 +402,15 @@ async function fetchRecentActivity() {
       return;
     }
 
-    sortedActivity.forEach(item => {
-      
-      const prefix = item.type === 'work' ? '[WORK] ' : '';
+sortedActivity.forEach(item => {
+  
+      let prefix = '';
+      if (item.type === 'work') {
+        prefix = '⧉&nbsp;| ';
+      } else if (item.type === 'writing') {
+        prefix = '✎&nbsp;| ';
+      }
+
       widgetContent.innerHTML += `
         <a href="${item.href}" class="widget-item">
           <span class="widget-title">${prefix}${item.title}</span>
@@ -430,4 +436,5 @@ window.addEventListener('load', function() {
 });
 </script>
 </body>
+
 </html>
