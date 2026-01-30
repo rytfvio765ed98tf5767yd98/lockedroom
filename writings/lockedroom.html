@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>inside of a locked room</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      height: 100dvh; /* Ustawia wysokość na pełny ekran */
+      height: 100dvh;
       background-color: #000;
       color: #cecece;
       font-family: monospace;
       overflow-x: hidden;
     }
 
-    /* CENTROWANIE ZAWARTOŚCI */
+
     body {
       display: flex;
-      justify-content: center; /* Środek w poziomie */
-      align-items: center;     /* Środek w pionie */
+      justify-content: center; 
+      align-items: center;    
     }
 
     body::before {
@@ -52,10 +53,9 @@
       z-index: 1;
       position: relative;
       mix-blend-mode: difference;
-      text-align: center; /* Wyśrodkowanie tekstu wierszy */
+      text-align: center; 
     }
 
-    /* SCROLLBAR */
     html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
