@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>about | maja braumberger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.png" type="image/png" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    html { scrollbar-gutter: stable; overflow-y: scroll; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('images/projects/backtodayone/4.webp') no-repeat center center;
+      background-size: cover;
+      filter: blur(2px) brightness(0.6); 
+      z-index: -1;
+      transform: scale(1.1); 
+    }
+
+    
+    .wide-strip {
+      position: fixed;
+      top: 0; left: 0; right: 0; height: 6vh;
+      background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
+      display: flex; align-items: stretch;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .nav-group { flex: 1; display: flex; }
+    .logo-island { flex: 0 0 120px; display: flex; justify-content: center; align-items: center; background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; }
+    .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
+    .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
+    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
+    .tile:hover { background-color: white; color: black; }
+
+  
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10vh 20px;
+      box-sizing: border-box;
+    }
+
+    .about-section {
+      max-width: 6000px;
+      text-align: center;
+    
+      z-index: 1;
+    }
+
+    .about-section h1 {
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .about-section p {
+      line-height: 1.8;
+    
+      font-size: 1rem;
+      font-weight: 300;
+        color: rgb(255, 255, 255);
+    }
+
+
+    footer {
+      width: 100%;
+      text-align: center; font-size: 12px; color: #666;
+      padding: 20px 0;
+      font-family: monospace;
+      z-index: 1;
+    }
+
+
+    html, body {
+      scrollbar-width: thin;
+      scrollbar-color: #333 #000;
+    }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
+
+    @media (max-width: 600px) {
+      .logo-island { flex: 0 0 80px; }
+      .tile { font-size: 1vh; }
+      .about-section h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="wide-strip">
+  <div class="nav-group">
+    <a href="gallery.html" class="tile">GALLERY</a>
+    <a href="writings.html" class="tile">WRITINGS</a>
+    <a href="works.html" class="tile">WORKS</a>
+  </div>
+  <div class="logo-island">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo/logo-mb.jpg" alt="MB">
+    </a>
+  </div>
+  <div class="nav-group">
+    <a href="directory.html" class="tile">DIRECTORY</a>
+    <a href="lichen.html" class="tile">???</a>
+    <a href="contact.html" class="tile">CONTACT</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <section class="about-section">
+    <h1>About</h1>
+    <p>
+<br>
+      Jack of all trades, master of none.<br>I'm a screwdriverist in Makao [Cracow, PL].<br>I shoot photos, write music & various texts,<br> draw since childhood, try to make films <br>and sense of all these things. 
+        
+        <br><br>...and I enjoy playing around with trivial HTML code.<br>You're on this website right now thanks to that fact.
+  <br><br><br><br><br>
+        EXHIBITIONS<BR><BR>[2024] "survival machines" - first personal exhibition | Cracow, PL<br>
+    
+        [2024] "back to day one" - Group exhibition of Masterclass ImageWorks | Cracow, PL
+        
+        <br><br><br><br><br>PHOTOGRAPHIC EDUCATION<BR><BR>
+        [2024] Masterclass Mentorship Program by ImageWorks Anita Andrzejewska & Andrzej Pilchowski-Ragno
+     <br>   [2023] Photographic Studies, Cracow University of Technology
+        
+    </p>
+      <br>
+
+  </section>
+</main>
+
+<footer>© 2026 maja braumberger. all rights reserved.</footer>
+
+</body>
+</html>
