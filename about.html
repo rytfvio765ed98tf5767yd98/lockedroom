@@ -17,10 +17,9 @@
       background-color: #000;
       color: #fff;
       font-family: 'Roboto Mono', monospace;
-      overflow: hidden; 
+      overflow-x: hidden; 
     }
 
-    
     #preloader { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
       background-color: black; display: flex; justify-content: center; align-items: center; 
@@ -33,7 +32,6 @@
     .blink { animation: blinker 1.5s linear infinite; }
     @keyframes blinker { 50% { opacity: 0; } }
 
-    
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -56,34 +54,62 @@
     }
     .tile:hover { background-color: white; color: black; }
 
-    
     .main-content {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 6vh 20px 0 20px;
+      padding: 10vh 20px;
       box-sizing: border-box;
     }
     .about-section {
-      max-width: 800px;
+      max-width: 400px;
       text-align: center;
       animation: fadeIn 1.5s ease-out;
     }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .about-section h1 { font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase; font-size: 14px; margin-bottom: 4vh; color: rgba(255,255,255,0.5); }
-    .about-section p { line-height: 1.7; font-size: 14px; font-weight: 300; margin: 0; color: #eee; }
-    .section-label { display: block; margin: 4vh 0 1.5vh 0; letter-spacing: 0.3em; font-size: 12px; color: #777; text-transform: uppercase; }
+    .about-section h1 { font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase; font-size: 20px; margin-bottom: 5vh; color: rgba(255,255,255,0.6); }
+    .about-section p { line-height: 2.0; font-size: 17px; font-weight: 300; margin: 0; color: #eee; }
+    .section-label { display: block; margin: 6vh 0 2vh 0; letter-spacing: 0.4em; font-size: 14px; color: #888; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 10px; }
 
-    footer { bottom: 2vh; width: 100%; text-align: center; font-size: 10px; color: #444; font-family: monospace; letter-spacing: 1px; }
+
+    .rip-image {
+      width: 20vh;
+      object-fit: contain;
+      margin: 4vh auto;
+      display: block;
+      opacity: 1;
+    }
+
+    .exhibition-entry { margin-bottom: 15px; display: block; color: #999; }
+    .exhibition-link {
+      color: #fff; 
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px solid #444;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .exhibition-link:hover {
+      color: #fff;
+      border-bottom: 1px solid #fff;
+      transform: translateY(-1px);
+    }
 
     @media (max-width: 600px) {
       html, body { overflow-y: auto; }
       .logo-island { flex: 0 0 80px; }
       .tile { font-size: 1vh; }
       .main-content { height: auto; padding: 12vh 20px 10vh 20px; }
+      .about-section p { font-size: 15px; }
     }
+    
+        html, body { scrollbar-width: thin; scrollbar-color: #333 #000; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
+
   </style>
 </head>
 <body>
@@ -121,34 +147,42 @@
       <h1>About</h1>
       <p>
         Jack of all trades, master of none.<br><br>
-        I'm a screwdriverist in Makao [Cracow, PL].<br>
-        I shoot photos, write music & various texts,<br> 
-        draw since childhood, try to make films <br>
+        I'm a screwdriverist in Makao [Cracow, PL]. I shoot photos, write music & various texts, draw since childhood, try to make films <br>
         and sense of all these things. 
         
         <br><br>
-        ...and I enjoy playing around with makeshift HTML code.<br>
-        You're on this website right now thanks to that fact.
-        <br><br>
+        ...and I enjoy playing around with makeshift HTML code.
+      </p>
+
+      <img src="rip.webp" alt="RIP" class="rip-image">
+
+      <p>
         <span class="section-label">EXHIBITIONS</span>
-        [2026] ???<br>
-        [2024] "survival machines" - first personal exhibition | Cracow, PL<br>
-        [2024] "back to day one" - Group exhibition of Masterclass ImageWorks | Cracow, PL
+        
+        <span class="exhibition-entry">[2026] ???</span>
+        
+        <span class="exhibition-entry">
+          [2024] "<a href="survivalmachines.html" class="exhibition-link">survival machines</a>" 
+          — first personal exhibition | Cracow, PL
+        </span>
+        
+        <span class="exhibition-entry">
+          [2024] "<a href="backtodayone.html" class="exhibition-link">back to day one</a>" 
+          — Group exhibition of Masterclass ImageWorks | Cracow, PL
+        </span>
         
         <span class="section-label">PHOTOGRAPHIC EDUCATION</span>
-        [2024] Masterclass Mentorship Program by ImageWorks Anita Andrzejewska & Andrzej Pilichowski-Ragno<br>
+        [2024] Masterclass Mentorship Program by ImageWorks Anita Andrzejewska & Andrzej Pilichowski-Ragno<br><br>
         [2023] Photographic Studies, Cracow University of Technology
       </p>
     </section>
   </main>
-
 
   <script>
     const bar = document.getElementById('bar');
     const preloader = document.getElementById('preloader');
     let progress = 0;
 
-    
     const progressInterval = setInterval(() => {
       if (progress < 85) {
         progress += Math.random() * 5; 
@@ -164,13 +198,9 @@
       }, 400);
     }
 
-    
     window.addEventListener('load', finishLoading);
-    
-    
     setTimeout(finishLoading, 2500);
   </script>
 
 </body>
 </html>
-
