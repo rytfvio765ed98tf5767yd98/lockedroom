@@ -118,6 +118,16 @@
       .filter-links { flex-wrap: wrap; gap: 8px; font-size: 11px; } 
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } 
     }
+
+            html, body {
+      scrollbar-width: thin;
+      scrollbar-color: #333 #000;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
+
   </style>
 </head>
 <body>
