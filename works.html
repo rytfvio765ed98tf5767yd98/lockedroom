@@ -22,7 +22,6 @@
       overflow-x: hidden;
     }
 
-  
     #preloader { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
       background-color: black; display: flex; justify-content: center; align-items: center; 
@@ -31,28 +30,13 @@
     #preloader.hidden { opacity: 0; visibility: hidden; }
     
     .loader-container { width: 90vw; max-width: 600px; height: 2px; background-color: rgba(255, 255, 255, 0.1); margin-top: 40px; position: relative; }
-    
-    .loader-bar { 
-      width: 0%; height: 2px; background-color: white; 
-      transition: width 0.4s ease-out; 
-    }
+    .loader-bar { width: 0%; height: 2px; background-color: white; transition: width 0.4s ease-out; }
 
-    .loading-text {
-      margin-top: 15px;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: #444;
-      text-transform: uppercase;
-    }
-
-
-    .blink { 
-      animation: blinker 1.5s linear infinite; 
-    }
-
+    .loading-text { margin-top: 15px; font-size: 10px; letter-spacing: 4px; color: #444; text-transform: uppercase; }
+    .blink { animation: blinker 1.5s linear infinite; }
     @keyframes blinker { 50% { opacity: 0; } }
 
-    
+
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -66,25 +50,43 @@
     .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
 
-    
+
     .filter-links {
       width: 90%; max-width: 1100px; margin: 32px auto 20px;
       display: flex; justify-content: center; align-items: center; gap: 15px;
     }
-    .filter-links a { color: #555; text-decoration: none; transition: 0.3s; font-weight: bold; text-transform: uppercase; font-size: 13px; }
+    .filter-links a { color: #555; text-decoration: none; transition: 0.3s; font-weight: bold; text-transform: uppercase; font-size: 13px; cursor: pointer; }
     .filter-links a:hover, .filter-links a.active-filter { color: #fff; }
     .filter-links .dot { color: #222; font-weight: bold; }
 
-  
+
     #works-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px 25px; 
       width: 90%; max-width: 1100px; margin: 40px auto 150px;
     }
-    .work-link { text-decoration: none; color: inherit; display: block; }
-    .media-container { width: 100%; aspect-ratio: 1 / 1; background-color: #111; overflow: hidden; border: 1px solid transparent; transition: border-color 0.4s ease; }
+    .work-link { 
+      text-decoration: none; color: inherit; display: block; 
+      position: relative; 
+    }
+    .media-container { 
+      width: 100%; aspect-ratio: 1 / 1; background-color: #111; 
+      overflow: hidden; border: 1px solid transparent; transition: border-color 0.4s ease;
+      position: relative;
+    }
     .work-link:hover .media-container { border-color: #fff; }
     .work-media { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.6s ease; }
     .work-link:hover .work-media { filter: grayscale(0); transform: scale(1.05); }
+
+  
+    .ascii-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: black; color: white;
+      font-family: 'Courier New', monospace; font-size: 12px; line-height: 10px;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; z-index: 20;
+      white-space: pre; overflow: hidden;
+      opacity: 0; transition: opacity 0.2s;
+    }
 
     .work-info { padding-top: 15px; display: flex; flex-direction: column; }
     .work-info .meta { font-size: 10px; color: #555; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
@@ -94,13 +96,48 @@
 
     footer { width: 90%; max-width: 1100px; text-align: center; font-size: 12px; color: #444; margin: 400px auto 12px; font-family: monospace; }
 
-    html, body { scrollbar-width: thin; scrollbar-color: #333 #000; }
+    @media (max-width: 900px) { #works-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; } }
+    @media (max-width: 600px) { .logo-island { flex: 0 0 80px; } .tile { font-size: 1vh; } .filter-links { flex-wrap: wrap; gap: 8px; font-size: 11px; } #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } }
+  
+  
+  
+
+    #works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px 25px;
+      width: 90%;
+      max-width: 1100px;
+      margin: 40px auto 150px;
+      transition: all 0.5s ease; 
+    }
+
+    .work-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+
+    .fade-in-quick {
+      animation: fadeInQuick 0.5s forwards;
+    }
+
+    @keyframes fadeInQuick {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  
+        html, body {
+      scrollbar-width: thin;
+      scrollbar-color: #333 #000;
+    }
+
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
-
-    @media (max-width: 900px) { #works-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; } }
-    @media (max-width: 600px) { .logo-island { flex: 0 0 80px; } .tile { font-size: 1vh; } .filter-links { flex-wrap: wrap; gap: 8px; font-size: 11px; } #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } }
   </style>
 </head>
 <body>
@@ -144,7 +181,10 @@
   <div id="works-grid">
     <a href="works/survivalmachines.html" class="work-link" data-category="conceptual-photography" data-date="01.01.3000">
       <div class="work-card">
-        <div class="media-container"><img src="images/projects/survivalmachines/sm1.webp" class="work-media"></div>
+        <div class="media-container">
+            <img src="images/projects/survivalmachines/sm1.webp" class="work-media">
+            <div class="ascii-overlay"></div>
+        </div>
         <div class="work-info">
           <div class="meta">29.11.2024 | CONCEPTUAL PHOTOGRAPHY</div>
           <h3>survival machines <span class="pinned-label">[pinned]</span></h3>
@@ -152,9 +192,12 @@
       </div>
     </a>
     
-        <a href="works/2025.html" class="work-link" data-category="concert-photography" data-date="30.01.2026">
+    <a href="works/2025.html" class="work-link" data-category="concert-photography" data-date="30.01.2026">
       <div class="work-card">
-        <div class="media-container"><img src="images/concerts/2025/20.webp" class="work-media"></div>
+        <div class="media-container">
+            <img src="images/concerts/2025/20.webp" class="work-media">
+            <div class="ascii-overlay"></div>
+        </div>
         <div class="work-info">
           <div class="meta">30.01.2026 | CONCERTS</div>
           <h3>a look back at 2025</h3>
@@ -164,25 +207,107 @@
     
     <a href="works/backtodayone.html" class="work-link" data-category="conceptual-photography" data-date="27.06.2024">
       <div class="work-card">
-        <div class="media-container"><img src="images/projects/backtodayone/2.webp" class="work-media"></div>
+        <div class="media-container">
+            <img src="images/projects/backtodayone/2.webp" class="work-media">
+            <div class="ascii-overlay"></div>
+        </div>
         <div class="work-info">
           <div class="meta">27.06.2024 | CONCEPTUAL PHOTOGRAPHY</div>
           <h3>back to day one</h3>
         </div>
       </div>
     </a>
-
   </div>
 
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
-  <script>
-    function filterWorks(category, clickedLink) {
-      document.querySelectorAll(".work-link").forEach(link => {
-        link.style.display = (category === 'all' || link.dataset.category === category) ? "block" : "none";
-      });
-      document.querySelectorAll('.filter-links a').forEach(l => l.classList.remove('active-filter'));
-      clickedLink.classList.add('active-filter');
+<script>
+    const richChars = ["$", "#", "x", "*", "+", ";", ":", ",", ".", " ", " "];
+    
+    function generateAsciiGrid(width, height, step, maxSteps, type) {
+        let str = "";
+        const centerX = width / 2;
+        const centerY = height / 2;
+        let progress = step / maxSteps;
+        const feather = 0.5; 
+
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const dx = (x - centerX) / (centerX * 1.2);
+                const dy = (y - centerY) / centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                let radius = type === "out" ? (1 - progress) : progress;
+                radius *= 1.5; 
+
+                let probability = (radius + feather - dist) / (feather * 2);
+                probability = Math.max(0, Math.min(1, probability));
+
+                if (Math.random() < probability) {
+                    const charPool = probability > 0.4 ? richChars : [".", ":", "·", " "];
+                    str += charPool[Math.floor(Math.random() * charPool.length)];
+                } else {
+                    str += Math.random() > 0.995 ? "·" : " ";
+                }
+            }
+            str += "\n";
+        }
+        return str;
+    }
+
+    async function animateAscii(overlay, type = "out") {
+        overlay.style.opacity = "1";
+        const steps = 12;
+        const frameTime = 30;
+
+        for (let i = 0; i <= steps; i++) {
+            overlay.innerText = generateAsciiGrid(28, 14, i, steps, type);
+            await new Promise(r => setTimeout(r, frameTime));
+        }
+        overlay.style.opacity = "0";
+        overlay.innerText = "";
+    }
+
+    async function filterWorks(category, clickedLink) {
+        const works = document.querySelectorAll(".work-link");
+        
+        document.querySelectorAll('.filter-links a').forEach(l => l.classList.remove('active-filter'));
+        clickedLink.classList.add('active-filter');
+
+        const toHide = [];
+        const toShow = [];
+
+        works.forEach(link => {
+            const isMatch = (category === 'all' || link.dataset.category === category);
+            const isVisible = link.style.display !== "none";
+
+            if (isVisible && !isMatch) {
+                toHide.push(link);
+            } else if (!isVisible && isMatch) {
+                toShow.push(link);
+            }
+        });
+
+     
+        if (toHide.length > 0) {
+            await Promise.all(toHide.map(async (link) => {
+                const overlay = link.querySelector('.ascii-overlay');
+                link.style.pointerEvents = "none";
+                await animateAscii(overlay, "out");
+                link.style.display = "none";
+            }));
+        }
+
+
+        if (toShow.length > 0) {
+            toShow.forEach(link => {
+                link.style.display = "block";
+                link.classList.remove('fade-in-quick');
+                void link.offsetWidth; 
+                link.classList.add('fade-in-quick');
+                link.style.pointerEvents = "auto";
+            });
+        }
     }
 
     const mediaElements = document.querySelectorAll('img, video');
@@ -192,50 +317,44 @@
     const totalMedia = mediaElements.length;
 
     function hidePreloader() {
-      if (preloader && !preloader.classList.contains('hidden')) {
-        if (bar) bar.style.width = '100%';
-        setTimeout(() => preloader.classList.add('hidden'), 300);
-      }
+        if (preloader && !preloader.classList.contains('hidden')) {
+            if (bar) bar.style.width = '100%';
+            setTimeout(() => preloader.classList.add('hidden'), 300);
+        }
     }
 
     function updateProgress() {
-      loadedCount++;
-      if (totalMedia > 0) {
-        const percentage = (loadedCount / totalMedia) * 100;
-        if (bar) bar.style.width = percentage + '%';
-        if (loadedCount >= totalMedia) hidePreloader();
-      }
+        loadedCount++;
+        if (totalMedia > 0) {
+            const percentage = (loadedCount / totalMedia) * 100;
+            if (bar) bar.style.width = percentage + '%';
+            if (loadedCount >= totalMedia) hidePreloader();
+        }
     }
 
-    
     const backupTimeout = setTimeout(hidePreloader, 3000);
 
     if (totalMedia === 0) {
-      hidePreloader();
+        hidePreloader();
     } else {
-      mediaElements.forEach(media => {
-        if (media.tagName.toLowerCase() === 'img') {
-          if (media.complete) updateProgress();
-          else { media.addEventListener('load', updateProgress); media.addEventListener('error', updateProgress); }
-        } else if (media.tagName.toLowerCase() === 'video') {
-          if (media.readyState >= 3) updateProgress();
-          else { media.addEventListener('loadedmetadata', updateProgress); media.addEventListener('error', updateProgress); }
-        }
-      });
+        mediaElements.forEach(media => {
+            if (media.tagName.toLowerCase() === 'img') {
+                if (media.complete) updateProgress();
+                else { media.addEventListener('load', updateProgress); media.addEventListener('error', updateProgress); }
+            }
+        });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById("works-grid");
-      if (grid) {
-        const cards = Array.from(grid.querySelectorAll('.work-link'));
-        cards.sort((a, b) => new Date(b.dataset.date.split('.').reverse().join('-')) - new Date(a.dataset.date.split('.').reverse().join('-')));
-        cards.forEach(c => grid.appendChild(c));
-      }
+        const grid = document.getElementById("works-grid");
+        if (grid) {
+            const cards = Array.from(grid.querySelectorAll('.work-link'));
+            cards.sort((a, b) => new Date(b.dataset.date.split('.').reverse().join('-')) - new Date(a.dataset.date.split('.').reverse().join('-')));
+            cards.forEach(c => grid.appendChild(c));
+        }
     });
 
     window.addEventListener('load', hidePreloader);
-  </script>
+</script>
 </body>
 </html>
-
-
