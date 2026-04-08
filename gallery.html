@@ -24,7 +24,6 @@
       overflow-x: hidden;
     }
 
-    
     #preloader { 
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
       background-color: black; display: flex; justify-content: center; align-items: center; 
@@ -51,7 +50,6 @@
     @keyframes blinker { 50% { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  
     .wide-strip {
       position: fixed;
       top: 0; left: 0; right: 0; height: 6vh;
@@ -75,7 +73,6 @@
     }
     .tile:hover { background-color: white; color: black; }
 
-    
     .content-wrapper { width: 100%; padding-bottom: 100px; animation: fadeIn 2s ease; }
     
     .header-container { padding: 60px 5% 15px 5%; text-align: left; }
@@ -95,13 +92,18 @@
     }
 
     .marquee-content {
-      display: flex; align-items: center; width: max-content; height: 80%;
-      animation: scroll 20s linear infinite both; gap: 32px; padding-right: 32px;
+      display: flex; 
+      align-items: center; 
+      width: max-content; 
+      height: 80%;
+      animation: scroll 30s linear infinite; 
+      gap: 32px; 
+      padding-right: 32px; 
     }
 
-    .static-content {
-      display: flex; align-items: center; justify-content: center; 
-      width: 100%; height: 80%; z-index: 1; gap: 2%; flex-wrap: nowrap;
+    @keyframes scroll { 
+      0% { transform: translateX(0); } 
+      100% { transform: translateX(-50%); } 
     }
 
     .media-frame { height: 100%; object-fit: cover; border-radius: 4px; background-color: rgba(0, 0, 0, 0); flex-shrink: 0; }
@@ -112,8 +114,6 @@
       width: 30%; max-width: 30%; aspect-ratio: 16 / 9; 
       object-fit: contain; flex-shrink: 1;
     }
-
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     .hero-strip::after {
       content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -143,7 +143,6 @@
       .logo-island { flex: 0 0 80px; }
       .tile { font-size: 1vh; }
       .hero-strip { height: 15vh; }
-      .static-content { gap: 10px; padding: 0 10px; box-sizing: border-box; }
       .video-frame { width: 31%; }
     }
   </style>
@@ -183,21 +182,23 @@
     
     <a href="works.html" class="hero-strip strip-photography">
       <div class="marquee-content">
-                <img src="images/website/gallery1.webp" class="media-frame photo-frame">
-                <img src="images/website/gallery2.webp" class="media-frame photo-frame">
-                     <img src="images/website/gallery3.webp" class="media-frame photo-frame">
-                <img src="images/website/gallery4.webp" class="media-frame photo-frame">
-            <img src="images/website/gallery5.webp" class="media-frame photo-frame">
-<img src="images/website/gallery6.webp" class="media-frame photo-frame">
-<img src="images/website/gallery7.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery1.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery2.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery3.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery4.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery5.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery6.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery7.webp" class="media-frame photo-frame">
         <img src="images/website/gallery8.webp" class="media-frame photo-frame">
-
-
-
-
-
-   
- 
+        
+        <img src="images/website/gallery1.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery2.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery3.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery4.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery5.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery6.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery7.webp" class="media-frame photo-frame">
+        <img src="images/website/gallery8.webp" class="media-frame photo-frame">
       </div>
     </a>
 
@@ -206,7 +207,7 @@
     </header>
     
     <a href="https://www.youtube.com/@makaoband" target="_blank" class="hero-strip strip-montage">
-      <div class="static-content">
+      <div class="static-content" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 80%; gap: 2%;">
         <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao2.mp4" type="video/mp4"></video>
         <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao1.mp4" type="video/mp4"></video>
         <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao3.mp4" type="video/mp4"></video>
@@ -239,7 +240,7 @@
       }
     }
 
-    const safetyTimeout = setTimeout(hidePreloader, 3000);
+    const safetyTimeout = setTimeout(hidePreloader, 4000);
 
     if (totalMedia === 0) {
       hidePreloader();
@@ -265,4 +266,3 @@
   </script>
 </body>
 </html>
-
