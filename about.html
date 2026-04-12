@@ -11,10 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-    html, body { 
+html, body { 
       height: 100%; 
       margin: 0; padding: 0; 
-      background-color: #000;
+
+      background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.92)), 
+                  url('ab.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; 
+      background-color: #000; 
+      
       color: #fff;
       font-family: 'Roboto Mono', monospace;
       overflow-x: hidden; 
@@ -63,15 +70,16 @@
       box-sizing: border-box;
     }
     .about-section {
+      
       max-width: 400px;
       text-align: center;
       animation: fadeIn 1.5s ease-out;
     }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .about-section h1 { font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase; font-size: 20px; margin-bottom: 5vh; color: rgba(255,255,255,0.6); }
-    .about-section p { line-height: 2.0; font-size: 17px; font-weight: 300; margin: 0; color: #eee; }
-    .section-label { display: block; margin: 6vh 0 2vh 0; letter-spacing: 0.4em; font-size: 14px; color: #888; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 10px; }
+    .about-section h1 { font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase; font-size: 20px; margin-bottom: 5vh; color: rgba(255,255,255,0.6); text-shadow: 0 0 10px rgba(0,0,0,0.8);}
+    .about-section p { line-height: 2.0; font-size: 17px; font-weight: 300; margin: 0; color: #eee; text-shadow: 0 0 10px rgba(0,0,0,0.8);}
+    .section-label { display: block; margin: 6vh 0 2vh 0; letter-spacing: 0.4em; font-size: 14px; color: #888; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 10px; text-shadow: 0 0 10px rgba(0,0,0,0.8);}
 
 
     .rip-image {
@@ -156,7 +164,7 @@
   ...and I enjoy playing around with makeshift HTML code.
 </p>
 
-      <img src="rip.webp" alt="RIP" class="rip-image">
+      <img src="rip2.webp" alt="RIP" class="rip-image">
 
       <p>
         <span class="section-label">EXHIBITIONS</span>
