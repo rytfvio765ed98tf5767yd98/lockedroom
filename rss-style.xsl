@@ -4,7 +4,7 @@
   <xsl:template match="/">
     <html lang="en">
       <head>
-        <title>RSS Feed | maja braumberger</title>
+        <title>rss | maja braumberger</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&amp;display=swap" rel="stylesheet"/>
         <style>
           body {
@@ -12,67 +12,95 @@
             color: #c8c8c8;
             font-family: 'Roboto Mono', monospace;
             margin: 0;
-            padding: 50px 20px;
+            padding: 80px 40px;
             display: flex;
             justify-content: center;
           }
           .container {
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
           }
           header {
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            padding-bottom: 40px;
+            margin-bottom: 60px;
           }
-          h1 { color: white; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; margin: 0; }
-          .subtitle { font-size: 11px; color: #666; margin-top: 10px; text-transform: lowercase; }
+          h1 { 
+            color: white; 
+            font-size: 28px;
+            letter-spacing: 6px; 
+            text-transform: lowercase;
+            margin: 0; 
+            font-weight: 300;
+          }
+          .subtitle { 
+            font-size: 13px; 
+            color: #555; 
+            margin-top: 15px; 
+            text-transform: lowercase; 
+            letter-spacing: 2px;
+          }
           
           .item {
-            margin-bottom: 30px;
-            padding: 15px;
+            margin-bottom: 40px;
+            padding: 25px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: background 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: block;
           }
           .item:hover {
-            background: rgba(255,255,255,0.03);
-            border-color: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
           }
           .item-title {
             color: white;
-            font-size: 14px;
+            font-size: 18px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
           }
           .item-meta {
-            font-size: 10px;
+            font-size: 11px;
             color: #767676;
             text-transform: uppercase;
+            letter-spacing: 2px;
           }
           .item-desc {
-            margin-top: 10px;
-            font-size: 12px;
-            line-height: 1.6;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.8;
             color: #9e9e9e;
           }
           .back-link {
             display: inline-block;
-            margin-top: 40px;
-            color: #666;
+            margin-top: 60px;
+            color: #444;
             text-decoration: none;
-            font-size: 11px;
-            border: 1px solid #333;
-            padding: 5px 15px;
+            font-size: 12px;
+            letter-spacing: 3px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: lowercase;
           }
-          .back-link:hover { color: white; border-color: white; }
+          .back-link:hover { 
+            color: white; 
+            border-bottom: 1px solid white;
+          }
+
+          /* Dla urządzeń mobilnych */
+          @media (max-width: 600px) {
+            body { padding: 40px 20px; }
+            h1 { font-size: 22px; }
+            .item-title { font-size: 16px; }
+          }
         </style>
       </head>
       <body>
         <div class="container">
           <header>
-            <h1><xsl:value-of select="/rss/channel/title"/></h1>
+            <h1>maja braumberger</h1>
             <div class="subtitle"><xsl:value-of select="/rss/channel/description"/></div>
           </header>
           
@@ -84,7 +112,7 @@
             </a>
           </xsl:for-each>
           
-          <a href="index.html" class="back-link">← RETURN TO HOME</a>
+          <a href="index.html" class="back-link">← return to home</a>
         </div>
       </body>
     </html>
