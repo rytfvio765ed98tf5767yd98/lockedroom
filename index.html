@@ -364,7 +364,17 @@
 .rss-button svg {
   display: block;
 }
-  
+
+#ncring {
+    transform: scale(1.5); 
+    transform-origin: center; 
+    margin: 10px 0;
+}
+
+
+#ncring table, #ncring td {
+    font-size: 14px !important; 
+}
   </style>
 </head>
 <body>
@@ -388,9 +398,13 @@
     <input type="checkbox" id="widget-toggle">
     <div class="widgets-drawer">
  <div class="widgets-content">
-  <a href="https://baccyflap.com/noai" target="_blank" style="display: block; line-height: 0;">
-    <img src="https://baccyflap.com/noai/miniwidget5.gif" alt="no ai" style="border: none;">
-  </a>
+<map name="noaicode">
+<area href="https://baccyflap.com/noai" target="_blank" shape="poly" coords="55,0,255,0,255,13,294,13,294,51,55,51" alt="no ai webring" title="no ai webring">
+<area href="https://baccyflap.com/noai/?prv&s=mbx" target="_top" shape="poly" coords="1,25,52,0,52,51" alt="previous" title="previous">
+<area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="258,1,294,10" alt="random" title="random">
+<area href="https://baccyflap.com/noai/?nxt&s=mbx" target="_top" shape="poly" coords="349,25,297,0,297,51" alt="next" title="next">
+</map>
+<img usemap="#noaicode" src="https://baccyflap.com/noai/codewidget-l.gif" alt="a long white bar with a background of blurry Python code, with the text AI? AIN'T INTERESTED! / THE NO AI WEBRING over it. In the top right corner is a button labeled RANDOM and to either side of the bar are rectangles labeled PREV and NEXT">
 
   <div id="ncring">
     <script src="https://neocreatives.neocities.org/onionring-variables.js"></script>
