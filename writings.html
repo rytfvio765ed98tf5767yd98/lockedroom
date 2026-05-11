@@ -26,7 +26,6 @@
       overflow-x: hidden;
     }
 
-    /* NAGŁÓWEK I NAWIGACJA */
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -40,7 +39,7 @@
     .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
 
-    /* HAMBURGER MENU SETTINGS */
+    
     .menu-trigger {
       display: none; color: white; text-decoration: none; font-size: 36px;
       letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
@@ -62,7 +61,7 @@
     }
     .nav-overlay.active { display: block; }
 
-    /* FILTRY */
+
     .filter-links {
       width: 90%; max-width: 800px; margin: 32px auto 20px;
       display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 18px;
@@ -71,7 +70,7 @@
     .filter-links a:hover, .filter-links a.active-filter { color: #fff; }
     .filter-links .dot { color: #222; font-weight: bold; }
 
-    /* TREŚĆ */
+  
     .page-header {
       text-align: center; width: 90%; max-width: 800px; margin: 60px auto 40px auto;
       letter-spacing: 0.3em; color: rgba(255, 255, 255, 0.9); font-size: 14px;
@@ -90,12 +89,11 @@
 
     footer { width: 90%; max-width: 800px; text-align: center; font-size: 12px; color: #444; margin: 32px auto 12px; font-family: monospace; }
 
-    /* SCROLLBAR */
+  
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-    /* RESPONSYWNOŚĆ */
     @media (max-width: 768px) {
       .nav-group { display: none; }
       .menu-trigger { display: flex; flex: 1; }
@@ -112,7 +110,7 @@
 </head>
 <body>
 
-<!-- MOBILNE MENU ELEMENTY -->
+
 <div class="nav-overlay" onclick="toggleMenu()"></div>
 
 <nav class="side-nav" id="mobileNav">
@@ -124,7 +122,7 @@
   <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-<!-- NAGŁÓWEK -->
+
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
   
@@ -232,13 +230,13 @@
 <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
 <script>
-// Funkcja Hamburger Menu
+
 function toggleMenu() {
   document.getElementById('mobileNav').classList.toggle('active');
   document.querySelector('.nav-overlay').classList.toggle('active');
 }
 
-// Funkcja Filtrowania
+
 function filterArticles(category, clickedLink) {
   const articles = document.querySelectorAll(".article-item");
   articles.forEach(article => {
@@ -250,7 +248,6 @@ function filterArticles(category, clickedLink) {
   clickedLink.classList.add('active-filter');
 }
 
-// Sortowanie Dat
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("articles");
   const articleLinks = Array.from(container.querySelectorAll('.article-link'));
