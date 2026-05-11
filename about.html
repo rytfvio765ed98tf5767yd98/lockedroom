@@ -16,21 +16,19 @@
     body {
       margin: 0; padding: 0;
       font-family: 'Roboto Mono', monospace;
-      
-    
       background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.92)), 
                   url('ab.webp');
       background-size: cover;
       background-position: center;
       background-attachment: fixed; 
       background-color: #000; 
-
       color: #aaa;
       padding-top: 10vh;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
+  
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -65,31 +63,41 @@
     }
     .nav-overlay.active { display: block; }
 
-    
+  
     .about-container {
       width: 90%;
-      max-width: 600px;
+      max-width: 400px; 
       margin: 60px auto;
       text-align: center;
     }
 
     .about-container h1 {
-      letter-spacing: 0.3em;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 14px;
+      letter-spacing: 0.6em;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 20px;
       text-transform: uppercase;
       font-weight: 300;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      padding-bottom: 15px;
-      margin-bottom: 40px;
+      margin-bottom: 5vh;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
     }
 
     .about-container p {
       line-height: 2.0;
-      font-size: 16px;
+      font-size: 17px;
       color: #eee;
-      margin: 0 0 30px 0;
+      margin: 0;
       text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    .section-label {
+      display: block;
+      margin: 6vh 0 2vh 0;
+      letter-spacing: 0.4em;
+      font-size: 14px;
+      color: #888;
+      text-transform: uppercase;
+      border-bottom: 1px solid #222; 
+      padding-bottom: 10px;
     }
 
     .exhibition-link {
@@ -103,20 +111,10 @@
       border-bottom: 1px solid #fff;
     }
 
-    .section-label {
-      display: block;
-      margin: 50px 0 20px 0;
-      letter-spacing: 0.3em;
-      font-size: 12px;
-      color: #888;
-      text-transform: uppercase;
-    }
-
     .rip-image {
-      width: 150px;
-      margin: 40px auto;
+      width: 20vh;
+      margin: 4vh auto;
       display: block;
-      opacity: 0.9;
     }
 
     .entry {
@@ -124,13 +122,10 @@
       margin-bottom: 15px;
       font-size: 14px;
       color: #999;
+      line-height: 1.6;
     }
 
     footer { width: 90%; max-width: 800px; text-align: center; font-size: 12px; color: #444; margin: 64px auto 32px; font-family: monospace; }
-
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
     @media (max-width: 768px) {
       .nav-group { display: none; }
@@ -139,6 +134,7 @@
       .logo-island img { height: 100%; }
       .wide-strip { justify-content: space-between; height: 83px; }
       .strip-placeholder { flex: 1; }
+      .about-container p { font-size: 15px; }
     }
   </style>
 </head>
