@@ -25,7 +25,7 @@
     body {
       background-color: #000;
       color: #aaa;
-      font-family: sans-serif; /* Powrót do pierwotnej czcionki treści */
+      font-family: sans-serif; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* --- NAVIGATION STRIP (Roboto Mono) --- */
+
     .wide-strip {
       position: fixed;
       top: 0; left: 0; right: 0; height: 6vh;
@@ -62,7 +62,7 @@
     }
     .tile:hover { background-color: white; color: black; }
 
-    /* --- MOBILE MENU (Roboto Mono) --- */
+ 
     .menu-trigger {
       display: none; color: white; text-decoration: none; font-size: 36px;
       letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
@@ -86,7 +86,7 @@
     }
     .nav-overlay.active { display: block; }
 
-    /* --- CONTENT --- */
+  
     .image-container {
       margin-top: 40px; 
       text-align: center;
@@ -166,7 +166,7 @@
       text-align: center;
     }
 
-    /* --- CUSTOM SCROLLBAR --- */
+  
     html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
@@ -175,7 +175,7 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 4px; }
 
-    /* --- RESPONSIVENESS --- */
+
     @media (max-width: 768px) {
       .nav-group { display: none; }
       .menu-trigger { display: flex; flex: 1; }
@@ -193,7 +193,7 @@
 </head>
 <body>
 
-<!-- MOBILE NAVIGATION -->
+
 <div class="nav-overlay" onclick="toggleMenu()"></div>
 <nav class="side-nav" id="mobileNav">
   <a href="gallery.html">GALLERY</a>
@@ -204,7 +204,6 @@
   <a href="contact.html">CONTACT</a>
 </nav>
 
-<!-- TOP STRIP -->
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
   
