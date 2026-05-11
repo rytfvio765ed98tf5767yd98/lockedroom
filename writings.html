@@ -11,26 +11,24 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
     html { scrollbar-gutter: stable; overflow-y: scroll; }
 
     body {
       margin: 0; padding: 0;
-      font-family: sans-serif;
-      background: black;
+      font-family: 'Roboto Mono', monospace;
       background-color: #000;
       color: #aaa;
-      display: block;
       padding-top: 10vh;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
+    /* NAGŁÓWEK I NAWIGACJA */
     .wide-strip {
-      position: fixed;
-      top: 0; left: 0; right: 0; height: 6vh;
+      position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
       display: flex; align-items: stretch;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -39,117 +37,116 @@
     .logo-island { flex: 0 0 120px; display: flex; justify-content: center; align-items: center; background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; }
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
     .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
-    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
+    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
 
-  
+    /* HAMBURGER MENU SETTINGS */
+    .menu-trigger {
+      display: none; color: white; text-decoration: none; font-size: 36px;
+      letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
+    }
+
+    .side-nav {
+      position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
+      background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex; flex-direction: column; padding: 12vh 40px; box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .side-nav.active { left: 0; }
+    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 25px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
+    .side-nav a:hover { opacity: 1; }
+
+    .nav-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 1500; display: none;
+    }
+    .nav-overlay.active { display: block; }
+
+    /* FILTRY */
     .filter-links {
-      width: 90%; max-width: 800px;
-      margin: 32px auto 20px;
-      display: flex; justify-content: center; align-items: center;
-      gap: 15px; font-family: 'Roboto Mono', monospace; font-size: 18px;
+      width: 90%; max-width: 800px; margin: 32px auto 20px;
+      display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 18px;
     }
     .filter-links a { color: #555; text-decoration: none; transition: 0.3s; font-weight: bold; }
     .filter-links a:hover, .filter-links a.active-filter { color: #fff; }
     .filter-links .dot { color: #222; font-weight: bold; }
 
+    /* TREŚĆ */
     .page-header {
-      font-family: 'Roboto Mono', monospace;
-      text-align: center; width: 90%; max-width: 800px;
-      margin: 60px auto 40px auto;
-      letter-spacing: 0.3em; color: rgba(255, 255, 255, 0.9);
-      font-size: 14px; text-transform: uppercase; font-weight: 300;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 15px;
+      text-align: center; width: 90%; max-width: 800px; margin: 60px auto 40px auto;
+      letter-spacing: 0.3em; color: rgba(255, 255, 255, 0.9); font-size: 14px;
+      text-transform: uppercase; font-weight: 300; border-bottom: 1px solid rgba(255, 255, 255, 0.03); padding-bottom: 15px;
     }
 
-  
     #articles { width: 90%; max-width: 800px; margin: 0 auto; }
-    
     .article-link { display: block; text-decoration: none; color: inherit; margin-bottom: 15px; }
-
-    .article-item {
-      padding: 20px;
-      background-color: rgba(17, 17, 17, 0.4);
-      border-left: 1px solid #222;
-      transition: all 0.3s ease;
-    }
-
-    .article-link:hover .article-item {
-      background-color: #0a0a0a;
-      border-left: 1px solid #fff;
-      padding-left: 25px;
-    }
-
+    .article-item { padding: 20px; background-color: rgba(17, 17, 17, 0.4); border-left: 1px solid #222; transition: all 0.3s ease; }
+    .article-link:hover .article-item { background-color: #0a0a0a; border-left: 1px solid #fff; padding-left: 25px; }
     .article-item h3 { margin: 0; font-size: 22px; color: #eee; transition: 0.3s; font-weight: normal; }
     .article-link:hover h3 { color: #fff; }
-
-    .article-meta-row {
-      display: flex; align-items: center; gap: 12px;
-      margin: 6px 0; font-family: 'Roboto Mono', monospace; font-size: 14px; color: #555;
-      text-transform: uppercase;
-    }
+    .article-meta-row { display: flex; align-items: center; gap: 12px; margin: 6px 0; font-size: 14px; color: #555; text-transform: uppercase; }
     .tag { color: #444; border: 1px solid #222; padding: 0px 5px; }
-
     .article-description { margin-top: 8px; font-size: 16px; color: #888; line-height: 1.5; }
 
-    footer {
-      width: 90%; max-width: 800px;
-      text-align: center; font-size: 12px; color: #444;
-      margin: 32px auto 12px; font-family: monospace;
-    }
+    footer { width: 90%; max-width: 800px; text-align: center; font-size: 12px; color: #444; margin: 32px auto 12px; font-family: monospace; }
 
-      html, body {
-      scrollbar-width: thin;
-      scrollbar-color: #333 #000;
-    }
-
+    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-    @media (max-width: 600px) {
-      .logo-island { flex: 0 0 80px; }
-      .tile { font-size: 1vh; }
+    /* RESPONSYWNOŚĆ */
+    @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .menu-trigger { display: flex; flex: 1; }
+      .logo-island { flex: 0 0 60px; border: none; background: transparent; }
+      .logo-island img { height: 100%; }
+      .wide-strip { justify-content: space-between; height: 83px; }
+      .strip-placeholder { flex: 1; }
+      
+      .filter-links { flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 15px; width: 95%; }
+      .filter-links .dot { display: none; }
+      .filter-links a { padding: 5px 10px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
     }
-    @media (max-width: 600px) {
-  .filter-links {
-    flex-wrap: wrap;      
-    justify-content: center; 
-    gap: 10px;              
-    font-size: 15px;        
-    width: 95%;             
-  }
-
-  .filter-links .dot {
-    display: none;          
-  }
-
-  .filter-links a {
-    padding: 5px 10px;     
-    background: rgba(255, 255, 255, 0.05); 
-    border-radius: 4px;
-  }
-}
   </style>
 </head>
 <body>
 
+<!-- MOBILNE MENU ELEMENTY -->
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+
+<nav class="side-nav" id="mobileNav">
+  <a href="gallery.html" onclick="toggleMenu()">GALLERY</a>
+  <a href="writings.html" onclick="toggleMenu()">WRITINGS</a>
+  <a href="works.html" onclick="toggleMenu()">WORKS</a>
+  <a href="directory.html" onclick="toggleMenu()">DIRECTORY</a>
+  <a href="about.html" onclick="toggleMenu()">ABOUT</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</nav>
+
+<!-- NAGŁÓWEK -->
 <nav class="wide-strip">
-  <div class="nav-group">
-    <a href="gallery.html" class="tile">GALLERY</a>
-    <a href="writings.html" class="tile">WRITINGS</a>
-    <a href="works.html" class="tile">WORKS</a>
-  </div>
+  <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
+  
   <div class="logo-island">
     <a href="index.html" class="logo-link">
       <img src="images/logo/logo-mb.jpg" alt="MB">
     </a>
   </div>
+  
+  <div class="nav-group">
+    <a href="gallery.html" class="tile">GALLERY</a>
+    <a href="writings.html" class="tile">WRITINGS</a>
+    <a href="works.html" class="tile">WORKS</a>
+  </div>
+  
   <div class="nav-group">
     <a href="directory.html" class="tile">DIRECTORY</a>
     <a href="about.html" class="tile">ABOUT</a>
     <a href="contact.html" class="tile">CONTACT</a>
   </div>
+
+  <div class="strip-placeholder"></div> 
 </nav>
 
 <div class="filter-links">
@@ -165,7 +162,6 @@
 </div>
   
 <div id="articles">
-  
     <a href="writings/reverie.html" class="article-link">
     <div class="article-item" data-category="poem">
       <h3>reverie</h3>
@@ -173,13 +169,8 @@
       <div class="article-description"></div>
     </div>
   </a>
-  
-  
-  
-<header class="page-header">FAREWELL, 2025</header>
 
-  
-  
+<header class="page-header">FAREWELL, 2025</header>
 
   <a href="writings/20steps.html" class="article-link">
     <div class="article-item" data-category="journal entry">
@@ -241,6 +232,13 @@
 <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
 <script>
+// Funkcja Hamburger Menu
+function toggleMenu() {
+  document.getElementById('mobileNav').classList.toggle('active');
+  document.querySelector('.nav-overlay').classList.toggle('active');
+}
+
+// Funkcja Filtrowania
 function filterArticles(category, clickedLink) {
   const articles = document.querySelectorAll(".article-item");
   articles.forEach(article => {
@@ -252,6 +250,7 @@ function filterArticles(category, clickedLink) {
   clickedLink.classList.add('active-filter');
 }
 
+// Sortowanie Dat
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("articles");
   const articleLinks = Array.from(container.querySelectorAll('.article-link'));
@@ -266,5 +265,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
-
 </html>
