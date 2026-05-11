@@ -297,9 +297,43 @@
     @media (max-width: 600px) {
       .click-hint { display: block; margin-left: 0; margin-top: 5px; }
     }
+    
+
+.header-container {
+  position: relative; 
+}
+
+.rss-link-gallery {
+  position: absolute;
+  right: 5%; 
+  top: 80px; 
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.rss-link-gallery:hover {
+  opacity: 1;
+  transform: scale(1.2); 
+}
+
+.rss-link-gallery svg {
+  stroke: #fff;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); 
+}
+
+
+@media (max-width: 480px) {
+  .rss-link-gallery {
+    top: 55px;
+    right: 5%;
+  }
+}
   </style>
 </head>
 <body>
+  
 <div id="art-overlay">
     <span class="close-overlay" onclick="closeArt()">&times;</span>
     <div class="overlay-content">
@@ -340,9 +374,17 @@
   </nav>
 
   <div class="content-wrapper">
-    <header class="header-container">
-      <h1 class="main-title">PHOTOGRAPHY</h1>
-    </header>
+<header class="header-container">
+  <h1 class="main-title">PHOTOGRAPHY</h1>
+  <a href="rss.xml" class="rss-link-gallery" title="RSS Feed">
+    <!-- Zwiększona ikona (32x32) -->
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 11a9 9 0 0 1 9 9"></path>
+      <path d="M4 4a16 16 0 0 1 16 16"></path>
+      <circle cx="5" cy="19" r="1"></circle>
+    </svg>
+  </a>
+</header>
     
     <a href="works.html" class="hero-strip strip-photography">
       <div class="marquee-content">
