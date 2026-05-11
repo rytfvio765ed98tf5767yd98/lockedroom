@@ -11,33 +11,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-html, body { 
-      height: 100%; 
-      margin: 0; padding: 0; 
+    html { scrollbar-gutter: stable; overflow-y: scroll; }
 
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      
+    
       background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.92)), 
                   url('ab.webp');
       background-size: cover;
       background-position: center;
       background-attachment: fixed; 
       background-color: #000; 
-      
-      color: #fff;
-      font-family: 'Roboto Mono', monospace;
-      overflow-x: hidden; 
-    }
 
-    #preloader { 
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-      background-color: black; display: flex; justify-content: center; align-items: center; 
-      z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s; 
+      color: #aaa;
+      padding-top: 10vh;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    #preloader.hidden { opacity: 0; visibility: hidden; }
-    .loader-container { width: 90vw; max-width: 600px; height: 2px; background-color: rgba(255, 255, 255, 0.1); margin-top: 40px; position: relative; }
-    .loader-bar { width: 0%; height: 2px; background-color: white; transition: width 0.3s ease-out; }
-    .loading-text { margin-top: 15px; font-size: 10px; letter-spacing: 4px; color: #444; text-transform: uppercase; text-align: center; }
-    .blink { animation: blinker 1.5s linear infinite; }
-    @keyframes blinker { 50% { opacity: 0; } }
 
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
@@ -46,171 +38,189 @@ html, body {
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .nav-group { flex: 1; display: flex; }
-    .logo-island { 
-      flex: 0 0 120px; display: flex; justify-content: center; align-items: center; 
-      background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
-      border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; 
-    }
-    .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
+    .logo-island { flex: 0 0 120px; display: flex; justify-content: center; align-items: center; background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; }
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
-    .tile { 
-      flex: 1; display: flex; justify-content: center; align-items: center; 
-      color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; 
-      transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); 
-      mix-blend-mode: difference; 
-    }
+    .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
+    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
 
-    .main-content {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10vh 20px;
-      box-sizing: border-box;
+    .menu-trigger {
+      display: none; color: white; text-decoration: none; font-size: 36px;
+      letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
     }
-    .about-section {
-      
-      max-width: 400px;
+
+    .side-nav {
+      position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
+      background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex; flex-direction: column; padding: 12vh 40px; box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .side-nav.active { left: 0; }
+    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 25px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
+    .side-nav a:hover { opacity: 1; }
+
+    .nav-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 1500; display: none;
+    }
+    .nav-overlay.active { display: block; }
+
+    
+    .about-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 60px auto;
       text-align: center;
-      animation: fadeIn 1.5s ease-out;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    .about-section h1 { font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase; font-size: 20px; margin-bottom: 5vh; color: rgba(255,255,255,0.6); text-shadow: 0 0 10px rgba(0,0,0,0.8);}
-    .about-section p { line-height: 2.0; font-size: 17px; font-weight: 300; margin: 0; color: #eee; text-shadow: 0 0 10px rgba(0,0,0,0.8);}
-    .section-label { display: block; margin: 6vh 0 2vh 0; letter-spacing: 0.4em; font-size: 14px; color: #888; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 10px; text-shadow: 0 0 10px rgba(0,0,0,0.8);}
-
-
-    .rip-image {
-      width: 20vh;
-      object-fit: contain;
-      margin: 4vh auto;
-      display: block;
-      opacity: 1;
     }
 
-    .exhibition-entry { margin-bottom: 15px; display: block; color: #999; }
+    .about-container h1 {
+      letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 300;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: 15px;
+      margin-bottom: 40px;
+    }
+
+    .about-container p {
+      line-height: 2.0;
+      font-size: 16px;
+      color: #eee;
+      margin: 0 0 30px 0;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
     .exhibition-link {
-      color: #fff; 
+      color: #fff;
       text-decoration: none;
       font-weight: 700;
       border-bottom: 1px solid #444;
-      transition: all 0.3s ease;
-      display: inline-block;
+      transition: 0.3s;
     }
     .exhibition-link:hover {
-      color: #fff;
       border-bottom: 1px solid #fff;
-      transform: translateY(-1px);
     }
 
-    @media (max-width: 600px) {
-      html, body { overflow-y: auto; }
-      .logo-island { flex: 0 0 80px; }
-      .tile { font-size: 1vh; }
-      .main-content { height: auto; padding: 12vh 20px 10vh 20px; }
-      .about-section p { font-size: 15px; }
+    .section-label {
+      display: block;
+      margin: 50px 0 20px 0;
+      letter-spacing: 0.3em;
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
     }
-    
-        html, body { scrollbar-width: thin; scrollbar-color: #333 #000; }
+
+    .rip-image {
+      width: 150px;
+      margin: 40px auto;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .entry {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    footer { width: 90%; max-width: 800px; text-align: center; font-size: 12px; color: #444; margin: 64px auto 32px; font-family: monospace; }
+
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
+    @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .menu-trigger { display: flex; flex: 1; }
+      .logo-island { flex: 0 0 60px; border: none; background: transparent; }
+      .logo-island img { height: 100%; }
+      .wide-strip { justify-content: space-between; height: 83px; }
+      .strip-placeholder { flex: 1; }
+    }
   </style>
 </head>
 <body>
 
-  <div id="preloader">
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <img src="images/logo/logo-intro-mb.jpg" alt="Logo" style="width: 120px;">
-      <div class="loader-container">
-        <div id="bar" class="loader-bar"></div>
-      </div>
-      <div class="loading-text blink">Loading</div>
-    </div>
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+
+<nav class="side-nav" id="mobileNav">
+  <a href="gallery.html" onclick="toggleMenu()">GALLERY</a>
+  <a href="writings.html" onclick="toggleMenu()">WRITINGS</a>
+  <a href="works.html" onclick="toggleMenu()">WORKS</a>
+  <a href="directory.html" onclick="toggleMenu()">DIRECTORY</a>
+  <a href="about.html" onclick="toggleMenu()">ABOUT</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</nav>
+
+<nav class="wide-strip">
+  <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
+  
+  <div class="logo-island">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo/logo-mb.jpg" alt="MB">
+    </a>
+  </div>
+  
+  <div class="nav-group">
+    <a href="gallery.html" class="tile">GALLERY</a>
+    <a href="writings.html" class="tile">WRITINGS</a>
+    <a href="works.html" class="tile">WORKS</a>
+  </div>
+  
+  <div class="nav-group">
+    <a href="directory.html" class="tile">DIRECTORY</a>
+    <a href="about.html" class="tile">ABOUT</a>
+    <a href="contact.html" class="tile">CONTACT</a>
   </div>
 
-  <nav class="wide-strip">
-    <div class="nav-group">
-      <a href="gallery.html" class="tile">GALLERY</a>
-      <a href="writings.html" class="tile">WRITINGS</a>
-      <a href="works.html" class="tile">WORKS</a>
-    </div>
-    <div class="logo-island">
-      <a href="index.html" class="logo-link">
-        <img src="images/logo/logo-mb.jpg" alt="MB">
-      </a>
-    </div>
-    <div class="nav-group">
-      <a href="directory.html" class="tile">DIRECTORY</a>
-      <a href="lichen.html" class="tile">???</a>
-      <a href="contact.html" class="tile">CONTACT</a>
-    </div>
-  </nav>
+  <div class="strip-placeholder"></div> 
+</nav>
 
-  <main class="main-content">
-    <section class="about-section">
-      <h1>About</h1>
-<p>
-  Jack of all trades, master of none.<br><br>
-  I'm a screwdriverist in 
-  <a href="https://www.instagram.com/makaoband" target="_blank" class="exhibition-link">Makao</a> 
-  [Cracow, PL]. I shoot photos, write music & various texts, draw since childhood, try to make films <br>
-  and sense of all these things. 
+<div class="about-container">
+  <h1>About</h1>
   
-  <br><br>
-  ...and I enjoy playing around with makeshift HTML code.
-</p>
+  <p>
+    Jack of all trades, master of none.<br><br>
+    I'm a screwdriverist in 
+    <a href="https://www.instagram.com/makaoband" target="_blank" class="exhibition-link">Makao</a> 
+    [Cracow, PL]. I shoot photos, write music & various texts, draw since childhood, try to make films <br>
+    and sense of all these things. 
+    <br><br>
+    ...and I enjoy playing around with makeshift HTML code.
+  </p>
 
-      <img src="rip2.webp" alt="RIP" class="rip-image">
+  <img src="rip2.webp" alt="RIP" class="rip-image">
 
-      <p>
-        <span class="section-label">EXHIBITIONS</span>
-        
-        <span class="exhibition-entry">[2026] ???</span>
-        
-        <span class="exhibition-entry">
-          [2024] "<a href="works/survivalmachines.html" class="exhibition-link">survival machines</a>" 
-          | first personal exhibition | Cracow, PL
-        </span>
-        
-        <span class="exhibition-entry">
-          [2024] "<a href="works/backtodayone.html" class="exhibition-link">back to day one</a>" 
-          | Group exhibition of Masterclass ImageWorks | Cracow, PL
-        </span>
-        
-        <span class="section-label">PHOTOGRAPHIC EDUCATION</span>
-        [2024] Masterclass Mentorship Program by ImageWorks Anita Andrzejewska & Andrzej Pilichowski-Ragno<br><br>
-        [2023] Photographic Studies, Cracow University of Technology
-      </p>
-    </section>
-  </main>
+  <span class="section-label">EXHIBITIONS</span>
+  
+  <span class="entry">[2026] ???</span>
+  
+  <span class="entry">
+    [2024] "<a href="works/survivalmachines.html" class="exhibition-link">survival machines</a>" 
+    | first personal exhibition | Cracow, PL
+  </span>
+  
+  <span class="entry">
+    [2024] "<a href="works/backtodayone.html" class="exhibition-link">back to day one</a>" 
+    | Group exhibition of Masterclass ImageWorks | Cracow, PL
+  </span>
+  
+  <span class="section-label">PHOTOGRAPHIC EDUCATION</span>
+  <span class="entry">[2024] Masterclass Mentorship Program by ImageWorks Anita Andrzejewska & Andrzej Pilichowski-Ragno</span>
+  <span class="entry">[2023] Photographic Studies, Cracow University of Technology</span>
+</div>
 
-  <script>
-    const bar = document.getElementById('bar');
-    const preloader = document.getElementById('preloader');
-    let progress = 0;
+<footer>© 2026 maja braumberger. all rights reserved.</footer>
 
-    const progressInterval = setInterval(() => {
-      if (progress < 85) {
-        progress += Math.random() * 5; 
-        if (bar) bar.style.width = progress + '%';
-      }
-    }, 150);
-
-    function finishLoading() {
-      clearInterval(progressInterval);
-      if (bar) bar.style.width = '100%';
-      setTimeout(() => {
-        if (preloader) preloader.classList.add('hidden');
-      }, 400);
-    }
-
-    window.addEventListener('load', finishLoading);
-    setTimeout(finishLoading, 2500);
-  </script>
+<script>
+function toggleMenu() {
+  document.getElementById('mobileNav').classList.toggle('active');
+  document.querySelector('.nav-overlay').classList.toggle('active');
+}
+</script>
 
 </body>
 </html>
