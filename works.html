@@ -20,8 +20,6 @@
       min-height: 100vh;
       font-family: 'Roboto Mono', monospace;
       overflow-x: hidden;
-      scrollbar-width: thin;
-      scrollbar-color: #333 #000;
     }
 
     #preloader { 
@@ -36,7 +34,7 @@
     .blink { animation: blinker 1.5s linear infinite; }
     @keyframes blinker { 50% { opacity: 0; } }
 
-    
+    /* MENU DESKTOP & BASE */
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -44,14 +42,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .nav-group { flex: 1; display: flex; }
-    
-    
+
     .logo-island { 
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
+      flex: 0 0 120px;
       height: 100%;
       display: flex; justify-content: center; align-items: center; 
       background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
@@ -59,9 +52,60 @@
     }
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
     .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
-    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
+    .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
 
+    .menu-trigger {
+      display: none; color: white; text-decoration: none; font-size: 36px;
+      letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
+    }
+
+    /* MENU MOBILNE / SIDE-NAV */
+    .side-nav {
+      position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
+      background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex; flex-direction: column; padding: 12vh 40px; box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .side-nav.active { left: 0; }
+    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 25px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
+    .side-nav a:hover { opacity: 1; }
+
+    .nav-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 1500; display: none;
+    }
+    .nav-overlay.active { display: block; }
+
+    /* MEDIA QUERIES DLA MENU (ZGODNE Z PIERWSZYM PLIKIEM) */
+    @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .menu-trigger { display: flex; flex: 1; position: relative; z-index: 1001; }
+
+      .logo-island { 
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 100%;
+        border: none; 
+        background: transparent; 
+        z-index: 1000;
+      }
+      .logo-island img { height: 100%; }
+      
+      .wide-strip { 
+        position: fixed;
+        display: flex;
+        align-items: center;
+        height: 83px; 
+      }
+      
+      .strip-placeholder { display: none; }
+    }
+
+    /* FILTRY I SIATKA WORKS */
     .filter-links {
       width: 90%; max-width: 1100px; margin: 32px auto 20px;
       display: flex; justify-content: center; align-items: center; gap: 15px;
@@ -124,145 +168,34 @@
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; } 
     }
     @media (max-width: 600px) { 
-      .tile { font-size: 1vh; } 
       .filter-links { flex-wrap: wrap; gap: 8px; font-size: 11px; } 
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } 
     }
 
+    /* SCROLLBAR */
     html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
     }
-
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
+    /* RSS STICKY */
     .rss-sticky-bottom {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      z-index: 2000;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      mix-blend-mode: normal;
+      position: fixed; bottom: 25px; right: 25px; z-index: 2000;
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1); width: 45px; height: 45px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
-    .rss-sticky-bottom:hover {
-      background: #fff;
-      border-color: #fff;
-    }
-
-    .rss-sticky-bottom svg {
-      stroke: #fff;
-      transition: stroke 0.3s ease;
-    }
-
-    .rss-sticky-bottom:hover svg {
-      stroke: #000; 
-    }
-
-    #preloader:not(.hidden) ~ .rss-sticky-bottom {
-      display: none;
-    }
+    .rss-sticky-bottom:hover { background: #fff; border-color: #fff; }
+    .rss-sticky-bottom svg { stroke: #fff; transition: stroke 0.3s ease; }
+    .rss-sticky-bottom:hover svg { stroke: #000; }
+    #preloader:not(.hidden) ~ .rss-sticky-bottom { display: none; }
 
     @media (max-width: 600px) {
-      .rss-sticky-bottom {
-        bottom: 15px;
-        right: 15px;
-        width: 38px;
-        height: 38px;
-      }
-    }
-
-    .menu-trigger {
-      display: none; 
-      color: white;
-      text-decoration: none;
-      font-size: 36px;
-      letter-spacing: 12px;
-      align-items: center;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    .side-nav {
-      position: fixed;
-      top: 0;
-      left: -100%; 
-      width: 55%;
-      height: 100%;
-      background: #000;
-      z-index: 2000;
-      transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-      display: flex;
-      flex-direction: column;
-      padding: 12vh 40px;
-      box-sizing: border-box;
-      border-right: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .side-nav.active {
-      left: 0;
-    }
-
-    .side-nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      margin: 25px 0;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0.6;
-    }
-
-    .side-nav a:hover { opacity: 1; }
-
-    .nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 1500;
-      display: none;
-    }
-
-    .nav-overlay.active { display: block; }
-
-
-    @media (max-width: 768px) {
-      .nav-group { display: none; } 
-      .menu-trigger { display: flex; flex: 1; } 
-
-      .logo-island { 
-        position: static;
-        transform: none;
-        width: auto;
-        flex: 0 0 60px; 
-        border: none;
-        background: transparent;
-      }
-      
-      .logo-island img {
-        height: 100%;
-      }
-
-      .wide-strip {
-        justify-content: space-between;
-        height: 83px;
-      }
-
-      .strip-placeholder { flex: 1; } 
+      .rss-sticky-bottom { bottom: 15px; right: 15px; width: 38px; height: 38px; }
     }
   </style>
 </head>
@@ -276,15 +209,15 @@
   </svg>
 </a>
   
-  <div id="preloader">
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <img src="images/logo/logo-intro-mb.jpg" alt="Logo" style="width: 120px;">
-      <div class="loader-container">
-        <div id="bar" class="loader-bar"></div>
-      </div>
-      <div class="loading-text blink">Loading</div>
+<div id="preloader">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="images/logo/logo-intro-mb.jpg" alt="Logo" style="width: 120px;">
+    <div class="loader-container">
+      <div id="bar" class="loader-bar"></div>
     </div>
+    <div class="loading-text blink">Loading</div>
   </div>
+</div>
 
 <div class="nav-overlay" onclick="toggleMenu()"></div>
 
@@ -297,7 +230,7 @@
   <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-
+<!-- STRUKTURA PASKA NAWIGACJI IDENTYCZNA JAK W "ABOUT" -->
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
   
@@ -307,73 +240,71 @@
     <a href="works.html" class="tile">WORKS</a>
   </div>
   
-  <div class="nav-group">
-    <a href="directory.html" class="tile">DIRECTORY</a>
-    <a href="about.html" class="tile">ABOUT</a>
-    <a href="contact.html" class="tile">CONTACT</a>
-  </div>
-
   <div class="logo-island">
     <a href="index.html" class="logo-link">
       <img src="images/logo/logo-mb.jpg" alt="MB">
     </a>
   </div>
 
-  <div class="strip-placeholder"></div> 
+  <div class="nav-group">
+    <a href="directory.html" class="tile">DIRECTORY</a>
+    <a href="about.html" class="tile">ABOUT</a>
+    <a href="contact.html" class="tile">CONTACT</a>
+  </div>
 </nav>
 
-  <div class="filter-links">
-    <a href="#" class="active-filter" onclick="filterWorks('all', this); return false;">all</a>
-    <span class="dot">•</span>
-    <a href="#" onclick="filterWorks('conceptual-photography', this); return false;">conceptual photography</a>
-    <span class="dot">•</span>
-    <a href="#" onclick="filterWorks('concert-photography', this); return false;">concerts</a>
-    <span class="dot">•</span>
-    <a href="#" onclick="filterWorks('film', this); return false;">film</a>
-  </div>
+<div class="filter-links">
+  <a href="#" class="active-filter" onclick="filterWorks('all', this); return false;">all</a>
+  <span class="dot">•</span>
+  <a href="#" onclick="filterWorks('conceptual-photography', this); return false;">conceptual photography</a>
+  <span class="dot">•</span>
+  <a href="#" onclick="filterWorks('concert-photography', this); return false;">concerts</a>
+  <span class="dot">•</span>
+  <a href="#" onclick="filterWorks('film', this); return false;">film</a>
+</div>
 
-  <div id="works-grid">
-    <a href="works/survivalmachines.html" class="work-link" data-category="conceptual-photography" data-date="01.01.3000">
-      <div class="work-card">
-        <div class="media-container">
-            <img src="images/projects/survivalmachines/sm1.webp" class="work-media">
-            <div class="ascii-overlay"></div>
-        </div>
-        <div class="work-info">
-          <div class="meta">29.11.2024 | CONCEPTUAL PHOTOGRAPHY</div>
-          <h3>survival machines <span class="pinned-label">[pinned]</span></h3>
-        </div>
+<div id="works-grid">
+  <a href="works/survivalmachines.html" class="work-link" data-category="conceptual-photography" data-date="01.01.3000">
+    <div class="work-card">
+      <div class="media-container">
+          <img src="images/projects/survivalmachines/sm1.webp" class="work-media">
+          <div class="ascii-overlay"></div>
       </div>
-    </a>
-    
-    <a href="works/2025.html" class="work-link" data-category="concert-photography" data-date="30.01.2026">
-      <div class="work-card">
-        <div class="media-container">
-            <img src="images/concerts/2025/20.webp" class="work-media">
-            <div class="ascii-overlay"></div>
-        </div>
-        <div class="work-info">
-          <div class="meta">30.01.2026 | CONCERTS</div>
-          <h3>a look back at 2025</h3>
-        </div>
+      <div class="work-info">
+        <div class="meta">29.11.2024 | CONCEPTUAL PHOTOGRAPHY</div>
+        <h3>survival machines <span class="pinned-label">[pinned]</span></h3>
       </div>
-    </a>
-    
-    <a href="works/backtodayone.html" class="work-link" data-category="conceptual-photography" data-date="27.06.2024">
-      <div class="work-card">
-        <div class="media-container">
-            <img src="images/projects/backtodayone/2.webp" class="work-media">
-            <div class="ascii-overlay"></div>
-        </div>
-        <div class="work-info">
-          <div class="meta">27.06.2024 | CONCEPTUAL PHOTOGRAPHY</div>
-          <h3>back to day one</h3>
-        </div>
+    </div>
+  </a>
+  
+  <a href="works/2025.html" class="work-link" data-category="concert-photography" data-date="30.01.2026">
+    <div class="work-card">
+      <div class="media-container">
+          <img src="images/concerts/2025/20.webp" class="work-media">
+          <div class="ascii-overlay"></div>
       </div>
-    </a>
-  </div>
+      <div class="work-info">
+        <div class="meta">30.01.2026 | CONCERTS</div>
+        <h3>a look back at 2025</h3>
+      </div>
+    </div>
+  </a>
+  
+  <a href="works/backtodayone.html" class="work-link" data-category="conceptual-photography" data-date="27.06.2024">
+    <div class="work-card">
+      <div class="media-container">
+          <img src="images/projects/backtodayone/2.webp" class="work-media">
+          <div class="ascii-overlay"></div>
+      </div>
+      <div class="work-info">
+        <div class="meta">27.06.2024 | CONCEPTUAL PHOTOGRAPHY</div>
+        <h3>back to day one</h3>
+      </div>
+    </div>
+  </a>
+</div>
 
-  <footer>© 2026 maja braumberger. all rights reserved.</footer>
+<footer>© 2026 maja braumberger. all rights reserved.</footer>
 
 <script>
   function toggleMenu() {
@@ -381,137 +312,137 @@
     document.querySelector('.nav-overlay').classList.toggle('active');
   }
   
-    const richChars = ["+", "#", "x", "*", "+", "''", ":", ",", ".", " ", " "];
-    
-    function generateAsciiGrid(width, height, step, maxSteps, type) {
-        let str = "";
-        const centerX = width / 2;
-        const centerY = height / 2;
-        let progress = step / maxSteps;
-        const feather = 0.5;
+  const richChars = ["+", "#", "x", "*", "+", "''", ":", ",", ".", " ", " "];
+  
+  function generateAsciiGrid(width, height, step, maxSteps, type) {
+      let str = "";
+      const centerX = width / 2;
+      const centerY = height / 2;
+      let progress = step / maxSteps;
+      const feather = 0.5;
 
-        for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-                const dx = (x - centerX) / (centerX * 1.2);
-                const dy = (y - centerY) / centerY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+      for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+              const dx = (x - centerX) / (centerX * 1.2);
+              const dy = (y - centerY) / centerY;
+              const dist = Math.sqrt(dx * dx + dy * dy);
 
-                let radius = type === "out" ? (1 - progress) : progress;
-                radius *= 1.5; 
+              let radius = type === "out" ? (1 - progress) : progress;
+              radius *= 1.5; 
 
-                let probability = (radius + feather - dist) / (feather * 2);
-                probability = Math.max(0, Math.min(1, probability));
+              let probability = (radius + feather - dist) / (feather * 2);
+              probability = Math.max(0, Math.min(1, probability));
 
-                if (Math.random() < probability) {
-                    const charPool = probability > 0.4 ? richChars : [".", ":", "·", " "];
-                    str += charPool[Math.floor(Math.random() * charPool.length)];
-                } else {
-                    str += Math.random() > 0.995 ? "·" : " ";
-                }
-            }
-            str += "\n";
-        }
-        return str;
-    }
+              if (Math.random() < probability) {
+                  const charPool = probability > 0.4 ? richChars : [".", ":", "·", " "];
+                  str += charPool[Math.floor(Math.random() * charPool.length)];
+              } else {
+                  str += Math.random() > 0.995 ? "·" : " ";
+              }
+          }
+          str += "\n";
+      }
+      return str;
+  }
 
-    async function animateAscii(overlay, type = "out") {
-        overlay.style.opacity = "1";
-        const steps = 15; 
-        const frameTime = 30; 
+  async function animateAscii(overlay, type = "out") {
+      overlay.style.opacity = "1";
+      const steps = 15; 
+      const frameTime = 30; 
 
-        for (let i = 0; i <= steps; i++) {
-            overlay.innerText = generateAsciiGrid(13, 9, i, steps, type);
-            await new Promise(r => setTimeout(r, frameTime));
-        }
-        
-        if (type === "out") {
-            overlay.style.opacity = "1"; 
-        } else {
-            overlay.style.opacity = "0"; 
-            overlay.innerText = "";
-        }
-    }
+      for (let i = 0; i <= steps; i++) {
+          overlay.innerText = generateAsciiGrid(13, 9, i, steps, type);
+          await new Promise(r => setTimeout(r, frameTime));
+      }
+      
+      if (type === "out") {
+          overlay.style.opacity = "1"; 
+      } else {
+          overlay.style.opacity = "0"; 
+          overlay.innerText = "";
+      }
+  }
 
-    async function filterWorks(category, clickedLink) {
-        const works = document.querySelectorAll(".work-link");
-        
-        document.querySelectorAll('.filter-links a').forEach(l => l.classList.remove('active-filter'));
-        clickedLink.classList.add('active-filter');
+  async function filterWorks(category, clickedLink) {
+      const works = document.querySelectorAll(".work-link");
+      
+      document.querySelectorAll('.filter-links a').forEach(l => l.classList.remove('active-filter'));
+      clickedLink.classList.add('active-filter');
 
-        const toHide = [];
-        const toShow = [];
+      const toHide = [];
+      const toShow = [];
 
-        works.forEach(link => {
-            const isMatch = (category === 'all' || link.dataset.category === category);
-            const isVisible = link.style.display !== "none";
+      works.forEach(link => {
+          const isMatch = (category === 'all' || link.dataset.category === category);
+          const isVisible = link.style.display !== "none";
 
-            if (isVisible && !isMatch) toHide.push(link);
-            else if (!isVisible && isMatch) toShow.push(link);
-        });
+          if (isVisible && !isMatch) toHide.push(link);
+          else if (!isVisible && isMatch) toShow.push(link);
+      });
 
-        if (toHide.length > 0) {
-            await Promise.all(toHide.map(async (link) => {
-                const overlay = link.querySelector('.ascii-overlay');
-                link.style.pointerEvents = "none";
-                await animateAscii(overlay, "out");
-                link.style.display = "none";
-            }));
-        }
+      if (toHide.length > 0) {
+          toHide.forEach(async (link) => {
+              const overlay = link.querySelector('.ascii-overlay');
+              link.style.pointerEvents = "none";
+              await animateAscii(overlay, "out");
+              link.style.display = "none";
+          });
+      }
 
-        if (toShow.length > 0) {
-            toShow.forEach(link => {
-                link.style.display = "block";
-                const overlay = link.querySelector('.ascii-overlay');
-                overlay.innerText = ""; 
-                animateAscii(overlay, "in").then(() => {
-                    link.style.pointerEvents = "auto";
-                });
-            });
-        }
-    }
+      if (toShow.length > 0) {
+          toShow.forEach(link => {
+              link.style.display = "block";
+              const overlay = link.querySelector('.ascii-overlay');
+              overlay.innerText = ""; 
+              animateAscii(overlay, "in").then(() => {
+                  link.style.pointerEvents = "auto";
+              });
+          });
+      }
+  }
 
-    const mediaElements = document.querySelectorAll('img, video');
-    const bar = document.getElementById('bar');
-    const preloader = document.getElementById('preloader');
-    let loadedCount = 0;
-    const totalMedia = mediaElements.length;
+  const mediaElements = document.querySelectorAll('img, video');
+  const bar = document.getElementById('bar');
+  const preloader = document.getElementById('preloader');
+  let loadedCount = 0;
+  const totalMedia = mediaElements.length;
 
-    function hidePreloader() {
-        if (preloader && !preloader.classList.contains('hidden')) {
-            if (bar) bar.style.width = '100%';
-            setTimeout(() => preloader.classList.add('hidden'), 300);
-        }
-    }
+  function hidePreloader() {
+      if (preloader && !preloader.classList.contains('hidden')) {
+          if (bar) bar.style.width = '100%';
+          setTimeout(() => preloader.classList.add('hidden'), 300);
+      }
+  }
 
-    function updateProgress() {
-        loadedCount++;
-        if (totalMedia > 0) {
-            const percentage = (loadedCount / totalMedia) * 100;
-            if (bar) bar.style.width = percentage + '%';
-            if (loadedCount >= totalMedia) hidePreloader();
-        }
-    }
+  function updateProgress() {
+      loadedCount++;
+      if (totalMedia > 0) {
+          const percentage = (loadedCount / totalMedia) * 100;
+          if (bar) bar.style.width = percentage + '%';
+          if (loadedCount >= totalMedia) hidePreloader();
+      }
+  }
 
-    if (totalMedia === 0) hidePreloader();
-    else {
-        mediaElements.forEach(media => {
-            if (media.tagName.toLowerCase() === 'img') {
-                if (media.complete) updateProgress();
-                else { media.addEventListener('load', updateProgress); media.addEventListener('error', updateProgress); }
-            }
-        });
-    }
+  if (totalMedia === 0) hidePreloader();
+  else {
+      mediaElements.forEach(media => {
+          if (media.tagName.toLowerCase() === 'img') {
+              if (media.complete) updateProgress();
+              else { media.addEventListener('load', updateProgress); media.addEventListener('error', updateProgress); }
+          }
+      });
+  }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const grid = document.getElementById("works-grid");
-        if (grid) {
-            const cards = Array.from(grid.querySelectorAll('.work-link'));
-            cards.sort((a, b) => new Date(b.dataset.date.split('.').reverse().join('-')) - new Date(a.dataset.date.split('.').reverse().join('-')));
-            cards.forEach(c => grid.appendChild(c));
-        }
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById("works-grid");
+      if (grid) {
+          const cards = Array.from(grid.querySelectorAll('.work-link'));
+          cards.sort((a, b) => new Date(b.dataset.date.split('.').reverse().join('-')) - new Date(a.dataset.date.split('.').reverse().join('-')));
+          cards.forEach(c => grid.appendChild(c));
+      }
+  });
 
-    window.addEventListener('load', hidePreloader);
+  window.addEventListener('load', hidePreloader);
 </script>
 </body>
 </html>
