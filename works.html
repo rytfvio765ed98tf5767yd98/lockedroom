@@ -60,7 +60,7 @@
       letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
     }
 
-    /* MENU MOBILNE / SIDE-NAV */
+  
     .side-nav {
       position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
       background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -77,7 +77,7 @@
     }
     .nav-overlay.active { display: block; }
 
-    /* MEDIA QUERIES DLA MENU (ZGODNE Z PIERWSZYM PLIKIEM) */
+    
     @media (max-width: 768px) {
       .nav-group { display: none; }
       .menu-trigger { display: flex; flex: 1; position: relative; z-index: 1001; }
@@ -105,7 +105,7 @@
       .strip-placeholder { display: none; }
     }
 
-    /* FILTRY I SIATKA WORKS */
+
     .filter-links {
       width: 90%; max-width: 1100px; margin: 32px auto 20px;
       display: flex; justify-content: center; align-items: center; gap: 15px;
@@ -172,7 +172,7 @@
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } 
     }
 
-    /* SCROLLBAR */
+
     html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
@@ -181,7 +181,7 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-    /* RSS STICKY */
+  
     .rss-sticky-bottom {
       position: fixed; bottom: 25px; right: 25px; z-index: 2000;
       background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
@@ -230,7 +230,7 @@
   <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-<!-- STRUKTURA PASKA NAWIGACJI IDENTYCZNA JAK W "ABOUT" -->
+
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
   
