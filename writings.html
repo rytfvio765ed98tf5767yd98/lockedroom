@@ -26,7 +26,7 @@
       overflow-x: hidden;
     }
 
-    /* --- GŁÓWNY NAGŁÓWEK (STRIP) --- */
+    
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -35,7 +35,6 @@
     }
     .nav-group { flex: 1; display: flex; }
     
-    /* POPRAWIONE: Pozycjonowanie absolutne dla idealnego wycentrowania logo na desktopie */
     .logo-island { 
       position: absolute;
       top: 0;
@@ -103,12 +102,12 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-    /* --- RESPONSIVE MEDIA QUERIES --- */
+  
     @media (max-width: 768px) {
       .nav-group { display: none; }
       .menu-trigger { display: flex; flex: 1; }
       
-      /* POPRAWIONE: Reset pozycjonowania na mobile */
+ 
       .logo-island { 
         position: static;
         transform: none;
@@ -140,7 +139,7 @@
   <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
-<!-- POPRAWIONE: Uporządkowany i w pełni symetryczny układ paska nawigacji na desktopie -->
+
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
   
