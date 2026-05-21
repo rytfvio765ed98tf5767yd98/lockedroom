@@ -36,6 +36,7 @@
     .blink { animation: blinker 1.5s linear infinite; }
     @keyframes blinker { 50% { opacity: 0; } }
 
+    
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -43,7 +44,19 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .nav-group { flex: 1; display: flex; }
-    .logo-island { flex: 0 0 120px; display: flex; justify-content: center; align-items: center; background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; }
+    
+    
+    .logo-island { 
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 100%;
+      display: flex; justify-content: center; align-items: center; 
+      background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
+      border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; 
+    }
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
     .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
     .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
@@ -56,7 +69,6 @@
     .filter-links a { color: #555; text-decoration: none; transition: 0.3s; font-weight: bold; text-transform: uppercase; font-size: 13px; cursor: pointer; }
     .filter-links a:hover, .filter-links a.active-filter { color: #fff; }
     .filter-links .dot { color: #222; font-weight: bold; }
-
 
     #works-grid {
       display: grid; 
@@ -72,7 +84,6 @@
       position: relative;
       opacity: 1;
     }
-
 
     .raw-appear {
         animation: rawStep 0.1s steps(2);
@@ -113,13 +124,12 @@
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; } 
     }
     @media (max-width: 600px) { 
-      .logo-island { flex: 0 0 80px; } 
       .tile { font-size: 1vh; } 
       .filter-links { flex-wrap: wrap; gap: 8px; font-size: 11px; } 
       #works-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; width: 95%; } 
     }
 
-            html, body {
+    html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
     }
@@ -128,134 +138,132 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-  
-.rss-sticky-bottom {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 2000;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  mix-blend-mode: normal;
-}
+    .rss-sticky-bottom {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      mix-blend-mode: normal;
+    }
 
-.rss-sticky-bottom:hover {
-  background: #fff;
-  border-color: #fff;
-}
+    .rss-sticky-bottom:hover {
+      background: #fff;
+      border-color: #fff;
+    }
 
-.rss-sticky-bottom svg {
-  stroke: #fff;
-  transition: stroke 0.3s ease;
-}
+    .rss-sticky-bottom svg {
+      stroke: #fff;
+      transition: stroke 0.3s ease;
+    }
 
-.rss-sticky-bottom:hover svg {
-  stroke: #000; 
-}
+    .rss-sticky-bottom:hover svg {
+      stroke: #000; 
+    }
 
+    #preloader:not(.hidden) ~ .rss-sticky-bottom {
+      display: none;
+    }
 
-#preloader:not(.hidden) ~ .rss-sticky-bottom {
-  display: none;
-}
+    @media (max-width: 600px) {
+      .rss-sticky-bottom {
+        bottom: 15px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
+      }
+    }
 
-@media (max-width: 600px) {
-  .rss-sticky-bottom {
-    bottom: 15px;
-    right: 15px;
-    width: 38px;
-    height: 38px;
-  }
-}
+    .menu-trigger {
+      display: none; 
+      color: white;
+      text-decoration: none;
+      font-size: 36px;
+      letter-spacing: 12px;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1100;
+    }
 
-.menu-trigger {
-  display: none; 
-  color: white;
-  text-decoration: none;
-  font-size: 36px;
-  letter-spacing: 12px;
-  align-items: center;
-  cursor: pointer;
-  z-index: 1100;
-}
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: -100%; 
+      width: 55%;
+      height: 100%;
+      background: #000;
+      z-index: 2000;
+      transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex;
+      flex-direction: column;
+      padding: 12vh 40px;
+      box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
 
+    .side-nav.active {
+      left: 0;
+    }
 
-.side-nav {
-  position: fixed;
-  top: 0;
-  left: -100%; 
-  width: 55%;
-  height: 100%;
-  background: #000;
-  z-index: 2000;
-  transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-  display: flex;
-  flex-direction: column;
-  padding: 12vh 40px;
-  box-sizing: border-box;
-  border-right: 1px solid rgba(255, 255, 255, 0.04);
-}
+    .side-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 25px 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
 
-.side-nav.active {
-  left: 0;
-}
+    .side-nav a:hover { opacity: 1; }
 
-.side-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  margin: 25px 0;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1500;
+      display: none;
+    }
 
-.side-nav a:hover { opacity: 1; }
-
-    
-.nav-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 1500;
-  display: none;
-}
-
-.nav-overlay.active { display: block; }
+    .nav-overlay.active { display: block; }
 
 
-@media (max-width: 768px) {
-  .nav-group { display: none; } 
-  .menu-trigger { display: flex; flex: 1; } 
-  
-  .logo-island { 
-    flex: 0 0 60px; 
-    border: none;
-    background: transparent;
-  }
-  
-  .logo-island img {
-    height: 100%;
-  }
+    @media (max-width: 768px) {
+      .nav-group { display: none; } 
+      .menu-trigger { display: flex; flex: 1; } 
 
-  .wide-strip {
-    justify-content: space-between;
-    height: 83px;
-  }
-  
+      .logo-island { 
+        position: static;
+        transform: none;
+        width: auto;
+        flex: 0 0 60px; 
+        border: none;
+        background: transparent;
+      }
+      
+      .logo-island img {
+        height: 100%;
+      }
 
-  .strip-placeholder { flex: 1; } 
-}
+      .wide-strip {
+        justify-content: space-between;
+        height: 83px;
+      }
+
+      .strip-placeholder { flex: 1; } 
+    }
   </style>
 </head>
 <body>
@@ -267,7 +275,6 @@
     <circle cx="5" cy="19" r="1"></circle>
   </svg>
 </a>
-  
   
   <div id="preloader">
     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -290,14 +297,9 @@
   <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
+
 <nav class="wide-strip">
-  <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
-  
-  <div class="logo-island">
-    <a href="index.html" class="logo-link">
-      <img src="images/logo/logo-mb.jpg" alt="MB">
-    </a>
-  </div>
+  <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
   
   <div class="nav-group">
     <a href="gallery.html" class="tile">GALLERY</a>
@@ -309,6 +311,12 @@
     <a href="directory.html" class="tile">DIRECTORY</a>
     <a href="about.html" class="tile">ABOUT</a>
     <a href="contact.html" class="tile">CONTACT</a>
+  </div>
+
+  <div class="logo-island">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo/logo-mb.jpg" alt="MB">
+    </a>
   </div>
 
   <div class="strip-placeholder"></div> 
@@ -369,14 +377,12 @@
 
 <script>
   function toggleMenu() {
-  document.getElementById('mobileNav').classList.toggle('active');
-  document.querySelector('.nav-overlay').classList.toggle('active');
-}
-  
+    document.getElementById('mobileNav').classList.toggle('active');
+    document.querySelector('.nav-overlay').classList.toggle('active');
+  }
   
     const richChars = ["+", "#", "x", "*", "+", "''", ":", ",", ".", " ", " "];
     
-
     function generateAsciiGrid(width, height, step, maxSteps, type) {
         let str = "";
         const centerX = width / 2;
@@ -451,7 +457,6 @@
                 link.style.display = "none";
             }));
         }
-
 
         if (toShow.length > 0) {
             toShow.forEach(link => {
