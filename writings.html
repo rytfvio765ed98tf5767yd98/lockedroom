@@ -26,7 +26,7 @@
       overflow-x: hidden;
     }
 
-    
+
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -34,13 +34,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .nav-group { flex: 1; display: flex; }
-    
+
     .logo-island { 
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
+      flex: 0 0 120px;
       height: 100%;
       display: flex; justify-content: center; align-items: center; 
       background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
@@ -102,27 +98,49 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
-  
+    
     @media (max-width: 768px) {
       .nav-group { display: none; }
-      .menu-trigger { display: flex; flex: 1; }
+      .menu-trigger { display: flex; flex: 1; position: relative; z-index: 1001; }
       
- 
       .logo-island { 
-        position: static;
-        transform: none;
-        width: auto;
-        flex: 0 0 60px; 
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 100%;
         border: none; 
         background: transparent; 
+        z-index: 1000;
       }
       .logo-island img { height: 100%; }
-      .wide-strip { justify-content: space-between; height: 83px; }
-      .strip-placeholder { flex: 1; }
+      
+      .wide-strip { 
+        position: fixed;
+        display: flex;
+        align-items: center;
+        height: 83px; 
+      }
+      
+      .strip-placeholder { display: none; }
       
       .filter-links { flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 15px; width: 95%; }
       .filter-links .dot { display: none; }
       .filter-links a { padding: 5px 10px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+
+
+      .hamburger-icon span { 
+        display: block; 
+        width: 100%; 
+        height: 2px; 
+        background-color: white; 
+        transform-origin: center; 
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s; 
+      }
+      .mobile-menu-checkbox:checked ~ .mobile-top-bar .hamburger-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+      .mobile-menu-checkbox:checked ~ .mobile-top-bar .hamburger-icon span:nth-child(2) { opacity: 0; }
+      .mobile-menu-checkbox:checked ~ .mobile-top-bar .hamburger-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
     }
   </style>
 </head>
@@ -142,26 +160,26 @@
 
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
-  
+
   <div class="nav-group">
     <a href="gallery.html" class="tile">GALLERY</a>
     <a href="writings.html" class="tile">WRITINGS</a>
     <a href="works.html" class="tile">WORKS</a>
   </div>
   
-  <div class="nav-group">
-    <a href="directory.html" class="tile">DIRECTORY</a>
-    <a href="about.html" class="tile">ABOUT</a>
-    <a href="contact.html" class="tile">CONTACT</a>
-  </div>
 
   <div class="logo-island">
     <a href="index.html" class="logo-link">
       <img src="images/logo/logo-mb.jpg" alt="MB">
     </a>
   </div>
+  
 
-  <div class="strip-placeholder"></div> 
+  <div class="nav-group">
+    <a href="directory.html" class="tile">DIRECTORY</a>
+    <a href="about.html" class="tile">ABOUT</a>
+    <a href="contact.html" class="tile">CONTACT</a>
+  </div>
 </nav>
 
 <div class="filter-links">
@@ -176,8 +194,6 @@
   <a href="#" onclick="filterArticles('journal entry', this); return false;">journal</a>
 </div>
 
-
-  
 <div id="articles">
   <a href="writings/reverie.html" class="article-link">
     <div class="article-item" data-category="poem">
@@ -185,7 +201,7 @@
       <div class="article-meta-row"><span>01.02.2026</span><span class="tag">poem</span></div>
       <div class="article-description"></div>
     </div>
-    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     farewell, 2025!
   </a>
 
