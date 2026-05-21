@@ -37,6 +37,7 @@
     @keyframes blinker { 50% { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+    
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -49,6 +50,9 @@
     .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
     .tile { flex: 1; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; }
     .tile:hover { background-color: white; color: black; }
+
+   
+    .strip-placeholder { display: none; }
 
     .content-wrapper { 
       width: 90%; max-width: 1400px; margin: 0 auto; flex: 1; padding-bottom: 60px; animation: fadeIn 2s ease;
@@ -88,6 +92,7 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
+
     .menu-trigger {
       display: none; 
       color: white;
@@ -115,10 +120,7 @@
       border-right: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    .side-nav.active {
-      left: 0;
-    }
-
+    .side-nav.active { left: 0; }
     .side-nav a {
       color: white;
       text-decoration: none;
@@ -128,7 +130,6 @@
       text-transform: uppercase;
       opacity: 0.6;
     }
-
     .side-nav a:hover { opacity: 1; }
 
     .nav-overlay {
@@ -141,32 +142,31 @@
       z-index: 1500;
       display: none;
     }
-
     .nav-overlay.active { display: block; }
 
+    
     @media (max-width: 768px) {
       .photo-grid { grid-template-columns: 1fr; gap: 10px; }
       
-    
       .nav-group { display: none; } 
       .menu-trigger { display: flex; flex: 1; } 
       
+     
       .logo-island { 
         flex: 0 0 60px; 
         border: none;
         background: transparent;
+        display: flex;
       }
-      
-      .logo-island img {
-        height: 100%;
-      }
+      .logo-island img { height: 100%; }
 
       .wide-strip {
         justify-content: space-between;
         height: 83px;
       }
       
-      .strip-placeholder { flex: 1; } 
+     
+      .strip-placeholder { display: flex; flex: 1; } 
     }
   </style>
 </head>
@@ -182,7 +182,6 @@
     </div>
   </div>
 
-  
   <div class="nav-overlay" onclick="toggleMenu()"></div>
 
   <nav class="side-nav" id="mobileNav">
@@ -195,7 +194,6 @@
   </nav>
 
   <nav class="wide-strip">
-
     <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
 
     <div class="nav-group">
@@ -212,7 +210,6 @@
       <a href="../contact.html" class="tile">CONTACT</a>
     </div>
 
-   
     <div class="strip-placeholder"></div> 
   </nav>
 
@@ -237,13 +234,11 @@
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
   <script>
-
     function toggleMenu() {
       document.getElementById('mobileNav').classList.toggle('active');
       document.querySelector('.nav-overlay').classList.toggle('active');
     }
 
-  
     const gallery = document.getElementById('main-gallery');
     const totalPhotos = 35;
     const basePath = "../images/concerts/2025/";
@@ -256,7 +251,6 @@
       gallery.appendChild(img);
     }
 
-  
     const images = document.querySelectorAll('img');
     const bar = document.getElementById('bar');
     const preloader = document.getElementById('preloader');
