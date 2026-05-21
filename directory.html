@@ -22,6 +22,8 @@
       box-sizing: border-box;
     }
 
+    html { scrollbar-gutter: stable; overflow-y: scroll; }
+
     body {
       background-color: #000;
       color: #aaa;
@@ -34,56 +36,48 @@
       overflow-x: hidden;
     }
 
-   
+
     .wide-strip {
-      position: fixed;
-      top: 0; left: 0; right: 0; height: 6vh;
+      position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
       display: flex; align-items: stretch;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       font-family: 'Roboto Mono', monospace;
     }
     .nav-group { flex: 1; display: flex; }
-    
+
     .logo-island { 
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
+      flex: 0 0 120px;
       height: 100%;
       display: flex; justify-content: center; align-items: center; 
       background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
       border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; 
     }
-    
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
-    .logo-island img { height: 111%; filter: grayscale(1) brightness(2); transition: opacity 0.3s; }
-    .logo-island img:hover { opacity: 0.8; }
-
+    .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
+    
     .tile { 
       flex: 1; display: flex; justify-content: center; align-items: center; 
-      color: white; text-decoration: none; 
-      font-size: 1.3vh; letter-spacing: 2px; transition: background-color 0.4s; 
-      border-right: 1px solid rgba(255, 255, 255, 0.1); mix-blend-mode: difference; 
+      color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; 
+      transition: background-color 0.4s; border-right: 1px solid rgba(255, 255, 255, 0.1); 
+      mix-blend-mode: difference; 
     }
     .tile:hover { background-color: white; color: black; }
 
     .menu-trigger {
       display: none; color: white; text-decoration: none; font-size: 36px;
       letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
-      padding-left: 20px;
     }
 
     .side-nav {
-      position: fixed; top: 0; left: -100%; width: 70%; height: 100%;
+      position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
       background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
       display: flex; flex-direction: column; padding: 12vh 40px; box-sizing: border-box;
       border-right: 1px solid rgba(255, 255, 255, 0.04);
       font-family: 'Roboto Mono', monospace;
     }
     .side-nav.active { left: 0; }
-    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 20px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
+    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 25px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
     .side-nav a:hover { opacity: 1; }
 
     .nav-overlay {
@@ -92,6 +86,7 @@
     }
     .nav-overlay.active { display: block; }
 
+ 
     .image-container {
       margin-top: 40px; 
       text-align: center;
@@ -171,29 +166,33 @@
       text-align: center;
     }
 
-    html, body {
-      scrollbar-width: thin;
-      scrollbar-color: #333 #000;
-    }
-    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
     @media (max-width: 768px) {
       .nav-group { display: none; }
-      .menu-trigger { display: flex; flex: 1; }
+      .menu-trigger { display: flex; flex: 1; position: relative; z-index: 1001; }
       
       .logo-island { 
-        position: static;
-        transform: none;
-        width: auto;
-        flex: 0 0 70px; 
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 100%;
         border: none; 
         background: transparent; 
+        z-index: 1000;
       }
       .logo-island img { height: 100%; }
-      .wide-strip { justify-content: space-between; height: 80px; }
-      .strip-placeholder { flex: 1; }
+      
+      .wide-strip { 
+        position: fixed;
+        display: flex;
+        align-items: center;
+        height: 83px; 
+      }
       
       .categories { width: 95%; }
       .category-title { font-size: 18px; }
@@ -205,22 +204,29 @@
 <body>
 
 <div class="nav-overlay" onclick="toggleMenu()"></div>
+
 <nav class="side-nav" id="mobileNav">
-  <a href="gallery.html">GALLERY</a>
-  <a href="writings.html">WRITINGS</a>
-  <a href="works.html">WORKS</a>
-  <a href="directory.html">DIRECTORY</a>
-  <a href="about.html">ABOUT</a>
-  <a href="contact.html">CONTACT</a>
+  <a href="gallery.html" onclick="toggleMenu()">GALLERY</a>
+  <a href="writings.html" onclick="toggleMenu()">WRITINGS</a>
+  <a href="works.html" onclick="toggleMenu()">WORKS</a>
+  <a href="directory.html" onclick="toggleMenu()">DIRECTORY</a>
+  <a href="about.html" onclick="toggleMenu()">ABOUT</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
 </nav>
 
 <nav class="wide-strip">
   <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
-  
+
   <div class="nav-group">
     <a href="gallery.html" class="tile">GALLERY</a>
     <a href="writings.html" class="tile">WRITINGS</a>
     <a href="works.html" class="tile">WORKS</a>
+  </div>
+  
+  <div class="logo-island">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo/logo-mb.jpg" alt="MB">
+    </a>
   </div>
   
   <div class="nav-group">
@@ -228,14 +234,6 @@
     <a href="about.html" class="tile">ABOUT</a>
     <a href="contact.html" class="tile">CONTACT</a>
   </div>
-
-  <div class="logo-island">
-    <a href="index.html" class="logo-link">
-      <img src="images/logo/logo-mb.jpg" alt="MB">
-    </a>
-  </div>
-
-  <div class="strip-placeholder"></div>
 </nav>
 
 <div class="image-container">
@@ -302,10 +300,8 @@
 
 <script>
   function toggleMenu() {
-    const nav = document.getElementById('mobileNav');
-    const overlay = document.querySelector('.nav-overlay');
-    nav.classList.toggle('active');
-    overlay.classList.toggle('active');
+    document.getElementById('mobileNav').classList.toggle('active');
+    document.querySelector('.nav-overlay').classList.toggle('active');
   }
 </script>
 
