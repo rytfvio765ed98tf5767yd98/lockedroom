@@ -40,7 +40,7 @@
     @keyframes blinker { 50% { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  
+    /* MENU DESKTOP & BASE */
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -49,13 +49,8 @@
     }
     .nav-group { flex: 1; display: flex; }
     
-    
     .logo-island { 
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
+      flex: 0 0 120px;
       height: 100%;
       display: flex; justify-content: center; align-items: center; 
       background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
@@ -72,12 +67,12 @@
     }
     .tile:hover { background-color: white; color: black; }
 
-    /* --- HAMBURGER MENU --- */
     .menu-trigger {
       display: none; color: white; text-decoration: none; font-size: 36px;
       letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
     }
 
+  
     .side-nav {
       position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
       background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -94,7 +89,34 @@
     }
     .nav-overlay.active { display: block; }
 
+    @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .menu-trigger { display: flex; flex: 1; position: relative; z-index: 1001; }
+      
+      .logo-island { 
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 100%;
+        border: none; 
+        background: transparent; 
+        z-index: 1000;
+      }
+      .logo-island img { height: 100%; }
+      
+      .wide-strip { 
+        position: fixed;
+        display: flex;
+        align-items: center;
+        height: 83px; 
+      }
+      
+      .strip-placeholder { display: none; }
+    }
     
+  
     .content-wrapper { width: 100%; padding-bottom: 40px; animation: fadeIn 2s ease; flex: 1; }
     
     .header-container { padding: 60px 5% 15px 5%; text-align: left; position: relative; }
@@ -151,7 +173,7 @@
     .art-slot:hover { border-color: #fff; z-index: 10; }
     .art-meta { position: absolute; bottom: 0; right: 0; font-size: 9px; letter-spacing: 2px; color: #fff; text-transform: uppercase; z-index: 2; background: #000; padding: 4px 8px; }
 
-    
+    /* OVERLAY */
     #art-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
@@ -174,24 +196,8 @@
 
     footer { width: 100%; text-align: center; font-size: 11px; color: #444; padding: 30px 0; font-family: monospace; }
 
-  
-    @media (max-width: 768px) {
-      .nav-group { display: none; }
-      .menu-trigger { display: flex; flex: 1; }
-      
-    
-      .logo-island { 
-        position: static;
-        transform: none;
-        width: auto;
-        flex: 0 0 60px; 
-        border: none; 
-        background: transparent; 
-      }
-      .logo-island img { height: 100%; }
-      .wide-strip { justify-content: space-between; height: 83px; }
-      .strip-placeholder { flex: 1; }
 
+    @media (max-width: 768px) {
       .hero-strip { height: 15vh; }
       .graphic-container { flex-direction: row; gap: 15px; padding-bottom: 40px; }
       .art-slot { flex: 1; max-width: 45%; }
@@ -212,7 +218,6 @@
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
-
   </style>
 </head>
 <body>
@@ -230,200 +235,198 @@
     </div>
 </div>
   
-  <div id="preloader">
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <img src="images/logo/logo-intro-mb.jpg" alt="Logo" style="width: 140px; opacity: 0; animation: fadeIn 1.5s ease forwards;">
-      <div class="loader-container">
-        <div id="bar" class="loader-bar"></div>
-      </div>
-      <div class="loading-text blink">Loading</div>
+<div id="preloader">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="images/logo/logo-intro-mb.jpg" alt="Logo" style="width: 140px; opacity: 0; animation: fadeIn 1.5s ease forwards;">
+    <div class="loader-container">
+      <div id="bar" class="loader-bar"></div>
     </div>
+    <div class="loading-text blink">Loading</div>
+  </div>
+</div>
+
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+
+<nav class="side-nav" id="mobileNav">
+  <a href="gallery.html" onclick="toggleMenu()">GALLERY</a>
+  <a href="writings.html" onclick="toggleMenu()">WRITINGS</a>
+  <a href="works.html" onclick="toggleMenu()">WORKS</a>
+  <a href="directory.html" onclick="toggleMenu()">DIRECTORY</a>
+  <a href="about.html" onclick="toggleMenu()">ABOUT</a>
+  <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
+</nav>
+
+
+<nav class="wide-strip">
+  <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
+  
+  <div class="nav-group">
+    <a href="gallery.html" class="tile">GALLERY</a>
+    <a href="writings.html" class="tile">WRITINGS</a>
+    <a href="works.html" class="tile">WORKS</a>
+  </div>
+  
+  <div class="logo-island">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo/logo-mb.jpg" alt="MB">
+    </a>
   </div>
 
+  <div class="nav-group">
+    <a href="directory.html" class="tile">DIRECTORY</a>
+    <a href="about.html" class="tile">ABOUT</a>
+    <a href="contact.html" class="tile">CONTACT</a>
+  </div>
+</nav>
 
-  <div class="nav-overlay" onclick="toggleMenu()"></div>
-  <nav class="side-nav" id="mobileNav">
-    <a href="gallery.html" onclick="toggleMenu()">GALLERY</a>
-    <a href="writings.html" onclick="toggleMenu()">WRITINGS</a>
-    <a href="works.html" onclick="toggleMenu()">WORKS</a>
-    <a href="directory.html" onclick="toggleMenu()">DIRECTORY</a>
-    <a href="about.html" onclick="toggleMenu()">ABOUT</a>
-    <a href="contact.html" onclick="toggleMenu()">CONTACT</a>
-  </nav>
-
-
-  <nav class="wide-strip">
-    <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
-    
-    <div class="nav-group">
-      <a href="gallery.html" class="tile">GALLERY</a>
-      <a href="writings.html" class="tile">WRITINGS</a>
-      <a href="works.html" class="tile">WORKS</a>
-    </div>
-    
-    <div class="nav-group">
-      <a href="directory.html" class="tile">DIRECTORY</a>
-      <a href="about.html" class="tile">ABOUT</a>
-      <a href="contact.html" class="tile">CONTACT</a>
-    </div>
-
-    <div class="logo-island">
-      <a href="index.html" class="logo-link">
-        <img src="images/logo/logo-mb.jpg" alt="MB">
-      </a>
-    </div>
-
-    <div class="strip-placeholder"></div> 
-  </nav>
-
-  <div class="content-wrapper">
-    <header class="header-container">
-      <h1 class="main-title">PHOTOGRAPHY</h1>
-      <a href="rss.xml" class="rss-link-gallery" title="RSS Feed">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 11a9 9 0 0 1 9 9"></path>
-          <path d="M4 4a16 16 0 0 1 16 16"></path>
-          <circle cx="5" cy="19" r="1"></circle>
-        </svg>
-      </a>
-    </header>
-    
-    <a href="works.html" class="hero-strip strip-photography">
-      <div class="marquee-content">
-        <img src="images/website/gallery1.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery2.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery3.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery4.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery5.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery6.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery7.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery8.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery1.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery2.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery3.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery4.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery5.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery6.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery7.webp" class="media-frame photo-frame">
-        <img src="images/website/gallery8.webp" class="media-frame photo-frame">
-      </div>
+<div class="content-wrapper">
+  <header class="header-container">
+    <h1 class="main-title">PHOTOGRAPHY</h1>
+    <a href="rss.xml" class="rss-link-gallery" title="RSS Feed">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 11a9 9 0 0 1 9 9"></path>
+        <path d="M4 4a16 16 0 0 1 16 16"></path>
+        <circle cx="5" cy="19" r="1"></circle>
+      </svg>
     </a>
+  </header>
+  
+  <a href="works.html" class="hero-strip strip-photography">
+    <div class="marquee-content">
+      <img src="images/website/gallery1.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery2.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery3.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery4.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery5.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery6.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery7.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery8.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery1.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery2.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery3.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery4.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery5.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery6.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery7.webp" class="media-frame photo-frame">
+      <img src="images/website/gallery8.webp" class="media-frame photo-frame">
+    </div>
+  </a>
 
-    <header class="header-container">
-      <h1 class="main-title">MONTAGE</h1>
-    </header>
-    
-    <a href="https://www.youtube.com/@makaoband" target="_blank" class="hero-strip strip-montage">
-      <div class="static-content" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 80%; gap: 2%;">
-        <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao2.mp4" type="video/mp4"></video>
-        <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao1.mp4" type="video/mp4"></video>
-        <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao3.mp4" type="video/mp4"></video>
-      </div>
-    </a>
-    
-    <header class="header-container">
-      <h1 class="main-title">
-        GRAPHIC ARTS <span class="click-hint">// click to see more</span>
-      </h1>
-    </header>
+  <header class="header-container">
+    <h1 class="main-title">MONTAGE</h1>
+  </header>
+  
+  <a href="https://www.youtube.com/@makaoband" target="_blank" class="hero-strip strip-montage">
+    <div class="static-content" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 80%; gap: 2%;">
+      <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao2.mp4" type="video/mp4"></video>
+      <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao1.mp4" type="video/mp4"></video>
+      <video class="media-frame video-frame" autoplay loop muted playsinline><source src="images/website/makao3.mp4" type="video/mp4"></video>
+    </div>
+  </a>
+  
+  <header class="header-container">
+    <h1 class="main-title">
+      GRAPHIC ARTS <span class="click-hint">// click to see more</span>
+    </h1>
+  </header>
 
-    <div class="graphic-container">
-      <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art1.webp', 'POSTER #01', 'Music increases the risk of hearing loss. Concert poster. Inspired by cigarette pack design.')">
-        <div class="art-meta">POSTER #01</div>
-        <img src="images/website/art1.webp" alt="Art 1">
-      </div>
-      <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art2.webp', 'POSTER #02', 'Layout design: Kazimierz Walczak • Concert poster. Hand-drawn, classic technique.')">
-        <div class="art-meta">POSTER #02</div>
-        <img src="images/website/art2.webp" alt="Art 2">
-      </div>
-      
-      <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art3.webp', 'POSTER #03', 'Layout design: Kazimierz Walczak • Concert poster. Digital painting.')">
-        <div class="art-meta">POSTER #03</div>
-        <img src="images/website/art3.webp" alt="Art 3">
-      </div>
+  <div class="graphic-container">
+    <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art1.webp', 'POSTER #01', 'Music increases the risk of hearing loss. Concert poster. Inspired by cigarette pack design.')">
+      <div class="art-meta">POSTER #01</div>
+      <img src="images/website/art1.webp" alt="Art 1">
+    </div>
+    <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art2.webp', 'POSTER #02', 'Layout design: Kazimierz Walczak • Concert poster. Hand-drawn, classic technique.')">
+      <div class="art-meta">POSTER #02</div>
+      <img src="images/website/art2.webp" alt="Art 2">
+    </div>
+    
+    <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art3.webp', 'POSTER #03', 'Layout design: Kazimierz Walczak • Concert poster. Digital painting.')">
+      <div class="art-meta">POSTER #03</div>
+      <img src="images/website/art3.webp" alt="Art 3">
     </div>
   </div>
+</div>
 
-  <footer>© 2026 maja braumberger. all rights reserved.</footer>
+<footer>© 2026 maja braumberger. all rights reserved.</footer>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById('mobileNav').classList.toggle('active');
-      document.querySelector('.nav-overlay').classList.toggle('active');
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('active');
+    document.querySelector('.nav-overlay').classList.toggle('active');
+  }
+  
+  function openArt(imgSrc, title, desc) {
+    const overlay = document.getElementById('art-overlay');
+    const overlayImg = document.getElementById('overlay-img');
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayDesc = document.getElementById('overlay-desc');
+
+    overlayImg.src = imgSrc;
+    overlayTitle.innerText = title;
+    overlayDesc.innerText = desc;
+
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; 
+  }
+
+  function closeArt() {
+    const overlay = document.getElementById('art-overlay');
+    overlay.style.display = 'none';
+    document.body.style.overflow = 'auto'; 
+  }
+
+  document.getElementById('art-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeArt();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") closeArt();
+  });
+
+  const mediaElements = document.querySelectorAll('img, video');
+  const bar = document.getElementById('bar');
+  const preloader = document.getElementById('preloader');
+  let loadedCount = 0;
+  const totalMedia = mediaElements.length;
+
+  function hidePreloader() {
+    if (preloader && !preloader.classList.contains('hidden')) {
+      if (bar) bar.style.width = '100%';
+      setTimeout(() => preloader.classList.add('hidden'), 500);
     }
-    
-    function openArt(imgSrc, title, desc) {
-      const overlay = document.getElementById('art-overlay');
-      const overlayImg = document.getElementById('overlay-img');
-      const overlayTitle = document.getElementById('overlay-title');
-      const overlayDesc = document.getElementById('overlay-desc');
+  }
 
-      overlayImg.src = imgSrc;
-      overlayTitle.innerText = title;
-      overlayDesc.innerText = desc;
-
-      overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; 
+  function updateProgress() {
+    loadedCount++;
+    if (totalMedia > 0) {
+      const percentage = (loadedCount / totalMedia) * 100;
+      if (bar) bar.style.width = percentage + '%';
+      if (loadedCount >= totalMedia) hidePreloader();
     }
+  }
 
-    function closeArt() {
-      const overlay = document.getElementById('art-overlay');
-      overlay.style.display = 'none';
-      document.body.style.overflow = 'auto'; 
-    }
-
-    document.getElementById('art-overlay').addEventListener('click', function(e) {
-      if (e.target === this) closeArt();
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === "Escape") closeArt();
-    });
-
-    const mediaElements = document.querySelectorAll('img, video');
-    const bar = document.getElementById('bar');
-    const preloader = document.getElementById('preloader');
-    let loadedCount = 0;
-    const totalMedia = mediaElements.length;
-
-    function hidePreloader() {
-      if (preloader && !preloader.classList.contains('hidden')) {
-        if (bar) bar.style.width = '100%';
-        setTimeout(() => preloader.classList.add('hidden'), 500);
-      }
-    }
-
-    function updateProgress() {
-      loadedCount++;
-      if (totalMedia > 0) {
-        const percentage = (loadedCount / totalMedia) * 100;
-        if (bar) bar.style.width = percentage + '%';
-        if (loadedCount >= totalMedia) hidePreloader();
-      }
-    }
-
-    if (totalMedia === 0) {
-      hidePreloader();
-    } else {
-      mediaElements.forEach(media => {
-        if (media.tagName.toLowerCase() === 'img') {
-          if (media.complete) updateProgress();
-          else {
-            media.addEventListener('load', updateProgress);
-            media.addEventListener('error', updateProgress);
-          }
-        } else if (media.tagName.toLowerCase() === 'video') {
-          if (media.readyState >= 3) updateProgress();
-          else {
-            media.addEventListener('canplaythrough', updateProgress);
-            media.addEventListener('error', updateProgress);
-          }
+  if (totalMedia === 0) {
+    hidePreloader();
+  } else {
+    mediaElements.forEach(media => {
+      if (media.tagName.toLowerCase() === 'img') {
+        if (media.complete) updateProgress();
+        else {
+          media.addEventListener('load', updateProgress);
+          media.addEventListener('error', updateProgress);
         }
-      });
-    }
+      } else if (media.tagName.toLowerCase() === 'video') {
+        if (media.readyState >= 3) updateProgress();
+        else {
+          media.addEventListener('canplaythrough', updateProgress);
+          media.addEventListener('error', updateProgress);
+        }
+      }
+    });
+  }
 
-    window.addEventListener('load', hidePreloader);
-    setTimeout(hidePreloader, 4000); 
-  </script>
+  window.addEventListener('load', hidePreloader);
+  setTimeout(hidePreloader, 4000); 
+</script>
 </body>
 </html>
