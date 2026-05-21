@@ -40,7 +40,7 @@
     @keyframes blinker { 50% { opacity: 0; } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* --- GŁÓWNY NAGŁÓWEK (STRIP) --- */
+  
     .wide-strip {
       position: fixed; top: 0; left: 0; right: 0; height: 6vh;
       background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
@@ -48,13 +48,22 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     .nav-group { flex: 1; display: flex; }
+    
+    
     .logo-island { 
-      flex: 0 0 120px; display: flex; justify-content: center; align-items: center; 
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 100%;
+      display: flex; justify-content: center; align-items: center; 
       background-color: black; border-left: 1px solid rgba(255, 255, 255, 0.1); 
       border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 6; 
     }
     .logo-link { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; text-decoration: none; }
     .logo-island img { height: 111%; filter: grayscale(1) brightness(2); }
+    
     .tile { 
       flex: 1; display: flex; justify-content: center; align-items: center; 
       color: white; text-decoration: none; font-size: 1.3vh; letter-spacing: 2px; 
@@ -85,7 +94,7 @@
     }
     .nav-overlay.active { display: block; }
 
-    /* --- GALLERY CONTENT --- */
+    
     .content-wrapper { width: 100%; padding-bottom: 40px; animation: fadeIn 2s ease; flex: 1; }
     
     .header-container { padding: 60px 5% 15px 5%; text-align: left; position: relative; }
@@ -142,7 +151,7 @@
     .art-slot:hover { border-color: #fff; z-index: 10; }
     .art-meta { position: absolute; bottom: 0; right: 0; font-size: 9px; letter-spacing: 2px; color: #fff; text-transform: uppercase; z-index: 2; background: #000; padding: 4px 8px; }
 
-    /* --- OVERLAY --- */
+    
     #art-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
@@ -165,11 +174,20 @@
 
     footer { width: 100%; text-align: center; font-size: 11px; color: #444; padding: 30px 0; font-family: monospace; }
 
-    /* --- RESPONSIVE --- */
+  
     @media (max-width: 768px) {
       .nav-group { display: none; }
       .menu-trigger { display: flex; flex: 1; }
-      .logo-island { flex: 0 0 60px; border: none; background: transparent; }
+      
+    
+      .logo-island { 
+        position: static;
+        transform: none;
+        width: auto;
+        flex: 0 0 60px; 
+        border: none; 
+        background: transparent; 
+      }
       .logo-island img { height: 100%; }
       .wide-strip { justify-content: space-between; height: 83px; }
       .strip-placeholder { flex: 1; }
@@ -186,7 +204,7 @@
       .click-hint { display: block; margin-left: 0; margin-top: 5px; }
     }
     
-                html, body {
+    html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
     }
@@ -235,13 +253,7 @@
 
 
   <nav class="wide-strip">
-    <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
-    
-    <div class="logo-island">
-      <a href="index.html" class="logo-link">
-        <img src="images/logo/logo-mb.jpg" alt="MB">
-      </a>
-    </div>
+    <div class="menu-trigger" onclick="toggleMenu()">&nbsp;∷</div>
     
     <div class="nav-group">
       <a href="gallery.html" class="tile">GALLERY</a>
@@ -253,6 +265,12 @@
       <a href="directory.html" class="tile">DIRECTORY</a>
       <a href="about.html" class="tile">ABOUT</a>
       <a href="contact.html" class="tile">CONTACT</a>
+    </div>
+
+    <div class="logo-island">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo/logo-mb.jpg" alt="MB">
+      </a>
     </div>
 
     <div class="strip-placeholder"></div> 
@@ -272,7 +290,6 @@
     
     <a href="works.html" class="hero-strip strip-photography">
       <div class="marquee-content">
-        
         <img src="images/website/gallery1.webp" class="media-frame photo-frame">
         <img src="images/website/gallery2.webp" class="media-frame photo-frame">
         <img src="images/website/gallery3.webp" class="media-frame photo-frame">
@@ -316,12 +333,12 @@
         <img src="images/website/art1.webp" alt="Art 1">
       </div>
       <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art2.webp', 'POSTER #02', 'Layout design: Kazimierz Walczak • Concert poster. Hand-drawn, classic technique.')">
-        <div class="art-meta">POSTER  #02</div>
+        <div class="art-meta">POSTER #02</div>
         <img src="images/website/art2.webp" alt="Art 2">
       </div>
       
-            <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art3.webp', 'POSTER #03', 'Layout designt: Kazimierz Walczak • Concert poster. Digital painting.')">
-        <div class="art-meta">POSTER  #03</div>
+      <div class="art-slot" style="cursor: pointer;" onclick="openArt('images/website/art3.webp', 'POSTER #03', 'Layout design: Kazimierz Walczak • Concert poster. Digital painting.')">
+        <div class="art-meta">POSTER #03</div>
         <img src="images/website/art3.webp" alt="Art 3">
       </div>
     </div>
@@ -330,7 +347,6 @@
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
   <script>
-
     function toggleMenu() {
       document.getElementById('mobileNav').classList.toggle('active');
       document.querySelector('.nav-overlay').classList.toggle('active');
@@ -363,7 +379,6 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === "Escape") closeArt();
     });
-
 
     const mediaElements = document.querySelectorAll('img, video');
     const bar = document.getElementById('bar');
@@ -400,7 +415,7 @@
         } else if (media.tagName.toLowerCase() === 'video') {
           if (media.readyState >= 3) updateProgress();
           else {
-            media.addEventListener('loadedmetadata', updateProgress);
+            media.addEventListener('canplaythrough', updateProgress);
             media.addEventListener('error', updateProgress);
           }
         }
