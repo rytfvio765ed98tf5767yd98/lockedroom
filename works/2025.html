@@ -53,6 +53,28 @@
     .tile:hover { background-color: white; color: black; }
 
    
+    .menu-trigger {
+      display: none; color: white; text-decoration: none; font-size: 36px;
+      letter-spacing: 12px; align-items: center; cursor: pointer; z-index: 1100;
+    }
+
+    .side-nav {
+      position: fixed; top: 0; left: -100%; width: 55%; height: 100%;
+      background: #000; z-index: 2000; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex; flex-direction: column; padding: 12vh 40px; box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .side-nav.active { left: 0; }
+    .side-nav a { color: white; text-decoration: none; font-size: 18px; margin: 25px 0; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; }
+    .side-nav a:hover { opacity: 1; }
+
+    .nav-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 1500; display: none;
+    }
+    .nav-overlay.active { display: block; }
+
+   
     .content-wrapper { 
       width: 90%; max-width: 1400px; margin: 0 auto; flex: 1; padding-bottom: 60px; animation: fadeIn 2s ease;
     }
@@ -87,9 +109,14 @@
     footer { width: 100%; text-align: center; font-size: 11px; color: #333; padding: 30px 0; background: #000; border-top: 1px solid rgba(255, 255, 255, 0.03); }
 
     @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .menu-trigger { display: flex; flex: 1; }
+      .logo-island { flex: 0 0 60px; border: none; background: transparent; }
+      .logo-island img { height: 100%; }
+      .wide-strip { justify-content: space-between; height: 83px; }
+      .strip-placeholder { flex: 1; }
+
       .photo-grid { grid-template-columns: 1fr; gap: 10px; }
-      .logo-island { flex: 0 0 80px; }
-      .tile { font-size: 1vh; }
     }
 
     html, body { scrollbar-width: thin; scrollbar-color: #333 #000; }
@@ -110,20 +137,35 @@
     </div>
   </div>
 
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+  <nav class="side-nav" id="mobileNav">
+    <a href="../gallery.html" onclick="toggleMenu()">GALLERY</a>
+    <a href="../writings.html" onclick="toggleMenu()">WRITINGS</a>
+    <a href="../works.html" onclick="toggleMenu()">WORKS</a>
+    <a href="../directory.html" onclick="toggleMenu()">DIRECTORY</a>
+    <a href="../lichen.html" onclick="toggleMenu()">???</a>
+    <a href="../contact.html" onclick="toggleMenu()">CONTACT</a>
+  </nav>
+
   <nav class="wide-strip">
+    <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
+    
+    <div class="logo-island">
+      <a href="../index.html" class="logo-link"><img src="../images/logo/logo-mb.jpg" alt="MB"></a>
+    </div>
+    
     <div class="nav-group">
       <a href="../gallery.html" class="tile">GALLERY</a>
       <a href="../writings.html" class="tile">WRITINGS</a>
       <a href="../works.html" class="tile">WORKS</a>
-    </div>
-    <div class="logo-island">
-      <a href="../index.html" class="logo-link"><img src="../images/logo/logo-mb.jpg" alt="MB"></a>
     </div>
     <div class="nav-group">
       <a href="../directory.html" class="tile">DIRECTORY</a>
       <a href="../lichen.html" class="tile">???</a>
       <a href="../contact.html" class="tile">CONTACT</a>
     </div>
+
+    <div class="strip-placeholder"></div> 
   </nav>
 
   <div class="content-wrapper">
@@ -147,6 +189,11 @@
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
   <script>
+    function toggleMenu() {
+      document.getElementById('mobileNav').classList.toggle('active');
+      document.querySelector('.nav-overlay').classList.toggle('active');
+    }
+
     const gallery = document.getElementById('main-gallery');
     const totalPhotos = 35;
     const basePath = "../images/concerts/2025/";
@@ -158,6 +205,7 @@
       img.loading = "lazy"; 
       gallery.appendChild(img);
     }
+
 
     const images = document.querySelectorAll('img');
     const bar = document.getElementById('bar');
@@ -188,9 +236,9 @@
       }
     });
 
+    window.addEventListener('load', hidePreloader);
     setTimeout(hidePreloader, 4000);
   </script>
 
 </body>
 </html>
-
