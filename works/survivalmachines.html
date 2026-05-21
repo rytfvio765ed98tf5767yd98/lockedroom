@@ -106,7 +106,7 @@
     @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } .project-info-row { flex-direction: column; gap: 30px; } }
     @media (max-width: 600px) { .logo-island { flex: 0 0 80px; } .tile { font-size: 1vh; } .project-header h1 { font-size: 24px; } }
 
-          html, body {
+    html, body {
       scrollbar-width: thin;
       scrollbar-color: #333 #000;
     }
@@ -115,6 +115,84 @@
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 5px; border: 2px solid #000; }
 
+   
+    .menu-trigger {
+      display: none; 
+      color: white;
+      text-decoration: none;
+      font-size: 36px;
+      letter-spacing: 12px;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: -100%; 
+      width: 55%;
+      height: 100%;
+      background: #000;
+      z-index: 2000;
+      transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex;
+      flex-direction: column;
+      padding: 12vh 40px;
+      box-sizing: border-box;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .side-nav.active {
+      left: 0;
+    }
+
+    .side-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 25px 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .side-nav a:hover { opacity: 1; }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1500;
+      display: none;
+    }
+
+    .nav-overlay.active { display: block; }
+
+    @media (max-width: 768px) {
+      .nav-group { display: none; } 
+      .menu-trigger { display: flex; flex: 1; } 
+      
+      .logo-island { 
+        flex: 0 0 60px; 
+        border: none;
+        background: transparent;
+      }
+      
+      .logo-island img {
+        height: 100%;
+      }
+
+      .wide-strip {
+        justify-content: space-between;
+        height: 83px;
+      }
+      
+      .strip-placeholder { flex: 1; } 
+    }
   </style>
 </head>
 <body>
@@ -129,7 +207,22 @@
     </div>
   </div>
 
+ 
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+
+  <nav class="side-nav" id="mobileNav">
+    <a href="../gallery.html" onclick="toggleMenu()">GALLERY</a>
+    <a href="../writings.html" onclick="toggleMenu()">WRITINGS</a>
+    <a href="../works.html" onclick="toggleMenu()">WORKS</a>
+    <a href="../directory.html" onclick="toggleMenu()">DIRECTORY</a>
+    <a href="../lichen.html" onclick="toggleMenu()">???</a>
+    <a href="../contact.html" onclick="toggleMenu()">CONTACT</a>
+  </nav>
+
+
   <nav class="wide-strip">
+    <div class="menu-trigger" onclick="toggleMenu()">&nbsp∷</div>
+
     <div class="nav-group">
       <a href="../gallery.html" class="tile">GALLERY</a>
       <a href="../writings.html" class="tile">WRITINGS</a>
@@ -143,6 +236,8 @@
       <a href="../lichen.html" class="tile">???</a>
       <a href="../contact.html" class="tile">CONTACT</a>
     </div>
+
+    <div class="strip-placeholder"></div> 
   </nav>
 
   <div class="content-wrapper">
@@ -196,13 +291,18 @@
   <footer>© 2026 maja braumberger. all rights reserved.</footer>
 
   <script>
+  
+    function toggleMenu() {
+      document.getElementById('mobileNav').classList.toggle('active');
+      document.querySelector('.nav-overlay').classList.toggle('active');
+    }
+
     const images = document.querySelectorAll('img');
     const bar = document.getElementById('bar');
     const preloader = document.getElementById('preloader');
     let loadedCount = 0;
     const totalImages = images.length;
 
-    
     const safetyTimeout = setTimeout(hidePreloader, 3000);
 
     function updateProgress() {
@@ -234,7 +334,6 @@
       });
     }
 
-    
     window.addEventListener('load', hidePreloader);
   </script>
 
