@@ -291,6 +291,93 @@
       .mobile-secondary-links { display: flex; flex-direction: row; gap: 25px; margin-top: 36px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; width: 75%; justify-content: center; }
       .mobile-secondary-links a { color: #999; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 16px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
     }
+    
+    
+
+    .hero-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .video-hero {
+      width: 560px; 
+      max-width: 90vw; 
+      aspect-ratio: 16 / 9; 
+      border-radius: 20px; 
+      overflow: hidden;
+      position: relative;
+      cursor: crosshair;
+      transition: opacity 0.2s ease-out;
+    }
+
+
+    .video-hero:hover {
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+    }
+
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      mix-blend-mode: difference;
+      visibility: hidden;
+      transition: opacity 0.2s ease-in-out, visibility 0.2s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .slide video, .slide img {
+      width: 100%; 
+      height: 100%;
+      object-fit: cover; 
+      display: block; 
+    }
+
+  
+    .slider-dots {
+      display: flex;
+      flex-direction: column; 
+      gap: 12px;
+      pointer-events: auto; 
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.1s ease;
+    }
+
+    .dot:hover {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .dot.active {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.2);
+    }
+    
+    .hero-wrapper {
+        flex-direction: column; 
+        gap: 15px;
+      }
+      .slider-dots {
+        flex-direction:row;
+      }
   </style>
 </head>
 <body>
@@ -304,11 +391,35 @@
 </div>
 
   <main>
-    <div class="video-hero">
+    
+<div class="hero-wrapper">
+  <div class="video-hero" id="featuredSlider">
+    
+    
+           <div class="slide active">
+      <video autoplay muted loop playsinline poster="saw.mp4">
+        <source src="../images/projects/saw/saw.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    
+    
+    <div class="slide active">
       <video autoplay muted loop playsinline poster="index.webm">
         <source src="index.webm" type="video/webm">
       </video>
     </div>
+
+
+
+    <div class="slide">
+    
+    </div>
+
+  </div>
+
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
 
     <input type="checkbox" id="widget-toggle">
     <div class="widgets-drawer">
@@ -420,6 +531,63 @@
   </div>
 
   <script>
+    
+
+    const slider = document.getElementById('featuredSlider');
+    const slides = slider.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    let currentIndex = 0;
+    let slideInterval; 1000;
+    const intervalTime = 5000;
+
+
+    if (dotsContainer && slides.length > 0) {
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+      if (!slides[currentIndex] || !dots[currentIndex]) return;
+      
+      slides[currentIndex].classList.remove('active');
+      dots[currentIndex].classList.remove('active');
+      
+      currentIndex = index;
+      
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+      let nextIndex = (currentIndex + 1) % slides.length;
+      goToSlide(nextIndex);
+    }
+
+    function startSlider() {
+      stopSlider(); 
+      slideInterval = setInterval(nextSlide, intervalTime);
+    }
+
+    function stopSlider() {
+      clearInterval(slideInterval);
+    }
+
+ 
+    startSlider();
+
+   
+    slider.addEventListener('mouseenter', stopSlider);
+    slider.addEventListener('mouseleave', startSlider);
+    
+    
+    
 async function fetchRandomQuote() {
   const quoteDisplay = document.getElementById("quote-display");
   try {
