@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
   
   <title>home | maja braumberger</title>
-  <style>
+<style>
     body {
       margin: 0;
       background: black url('images/website/maja-braumberger-bg.webp') no-repeat center center;
@@ -227,9 +227,11 @@
   
     @media (max-width: 768px) {
       body {
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         overflow-y: auto; 
+        height: auto;
+        min-height: 100dvh;
       }
 
       main {
@@ -237,8 +239,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
+        justify-content: flex-start;
+        gap: 20px;
+        padding-bottom: 50px;
       }
 
       #recent-writings-widget {
@@ -246,14 +249,15 @@
         bottom: auto;
         right: auto;
         width: 90vw;            
-        max-width: 250px;       
-        margin: 50px auto auto; 
+        max-width: 300px;       
+        margin: 75px auto auto; 
         transform: none !important; 
-        border-radius: px;    
+        
         background: rgba(0, 0, 0, 0.84);
-        padding: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        padding: 15px;
+   
         z-index: 2;
+        box-sizing: border-box;
       }
 
       .activity-handle { 
@@ -261,17 +265,21 @@
       }
 
       #recent-writings-widget h4 {
-        font-size: 15px;
-        margin-bottom: 6px;
+        font-size: 14px;
+        margin-bottom: 8px;
       }
       .widget-item {
-        padding: 4px 6px;
+        padding: 6px 4px;
       }
       .widget-title {
-        font-size: 12px;
+        font-size: 13px;
+        white-space: normal;
+        word-break: break-word;
       }
       .widget-date {
         font-size: 13px;
+        display: block;
+        margin-top: 2px;
       }
 
   
@@ -369,7 +377,7 @@
       .mobile-secondary-links { display: flex; flex-direction: row; gap: 25px; margin-top: 36px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; width: 75%; justify-content: center; }
       .mobile-secondary-links a { color: #999; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 16px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
     }
-  </style>
+</style>
 </head>
 <body>
 
